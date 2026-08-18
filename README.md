@@ -6,27 +6,23 @@ Server-side source code for the Novera game project. This repository contains al
 
 | Project | Type | Description |
 |---------|------|-------------|
-| LSLog | DLL / Static | Logging library (DLL + static variants) |
-| ioPac | DLL / Static | Pack file system library (DLL + static variants) |
-| TownPortal | DLL / Static | Network portal library (DLL + static variants) |
-| ioFreeType | DLL | FreeType font rendering wrapper |
-| OggVorbis | Static Lib | OggVorbis audio codec built from source |
-| ErrorDlg | Static Lib | Error dialog utility |
-| LSDBAgent | App | Database agent server |
-| LSFileWriteSvr | App | File write server |
-| LSGateSvr | App | Gate server |
-| LSGameSvr | App | Game server |
-| LSLogClient | App | Log client |
-| LSLoginSvr | App | Login server |
-| LSMainSvr | App | Main server |
-| LSNickNameSvr | App | Nickname server |
-| LSPatchSvr | App | Patch server |
-| LSBillingSvr | App | Billing server |
-| LSRelaySvr | App | Relay server |
-| LSStateSvr | App | State server |
-| LSWebSvr | App | Web server |
-| ioIocpSocketDLL | DLL | IOCP socket library |
-| ioLangDLL | DLL | Language/localization library |
+| ioINILoader | Static Lib | INI file parser |
+| Log | Static Lib | Logging library |
+| iocpSocketDLL | DLL | IOCP socket library |
+| FrameTimerDLL | DLL | Frame timer library |
+| LogDLL | DLL | Log sync library |
+| LS_GoogleDump | Static Lib | Google breakpad crash dump |
+| LS_NXSoap | Static Lib | SOAP client library |
+| LS_HTTP | Static Lib | HTTP client library |
+| tinyxml | Static Lib | TinyXML parser |
+| LS_RestAPI | Static Lib | REST API library |
+| ls_loginsvr | App | Login server |
+| ls_relaysvr | App | Relay server |
+| ls_mainsvr | App | Main server |
+| ls_gamesvr | App | Game server |
+| ls_billingsvr | App | Billing server |
+| ls_dbagent | App | Database agent server |
+| ls_filewritesvr | App | File write server |
 
 ## Prerequisites
 
@@ -56,30 +52,23 @@ scripts\build_project.bat                          # List available projects
 
 ```
 SourceServer/
+├── build.bat             # Premake5 generator (auto-downloads premake5)
 ├── premake5.lua          # Premake5 build configuration
-├── scripts/              # Build helper scripts
+├── scripts/              # Build scripts (build.bat, build_project.bat, gen_version.bat)
 ├── src/                  # Source code
-│   ├── ioIocpSocketDLL/  # IOCP socket library
-│   ├── ioLangDLL/        # Language library
-│   ├── ioPac/            # Pack file system
-│   ├── ioFreeType/       # Font rendering
-│   ├── LSLog/            # Logging
-│   ├── TownPortal/       # Network portal
-│   ├── OggVorbis/        # Audio codec
-│   ├── ErrorDlg/         # Error dialogs
-│   ├── LSDBAgent/        # Database agent server
-│   ├── LSFileWriteSvr/   # File write server
-│   ├── LSGateSvr/        # Gate server
-│   ├── LSGameSvr/        # Game server
-│   ├── LSLogClient/      # Log client
-│   ├── LSLoginSvr/       # Login server
-│   ├── LSMainSvr/        # Main server
-│   ├── LSNickNameSvr/    # Nickname server
-│   ├── LSPatchSvr/       # Patch server
-│   ├── LSBillingSvr/     # Billing server
-│   ├── LSRelaySvr/       # Relay server
-│   ├── LSStateSvr/       # State server
-│   └── LSWebSvr/         # Web server
+│   ├── ioINILoader/      # INI file parser
+│   ├── Log/              # Logging library
+│   ├── iocpSocketDLL/    # IOCP socket library
+│   ├── FrameTimerDLL/    # Frame timer library
+│   ├── Log_Sync/         # Log sync DLL
+│   ├── include/          # Shared headers
+│   ├── ls_loginsvr/      # Login server
+│   ├── ls_relaysvr/      # Relay server
+│   ├── ls_mainsvr/       # Main server
+│   ├── ls_gamesvr/       # Game server
+│   ├── ls_billingsvr/    # Billing server
+│   ├── ls_dbagent/       # Database agent server
+│   └── ls_filewritesvr/  # File write server
 ├── ThirdParty/           # Third-party headers and libraries
 ├── lib/                  # Build outputs (.lib, .dll)
 └── build/                # Generated VS2010 project files (gitignored)
