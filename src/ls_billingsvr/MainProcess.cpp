@@ -341,13 +341,13 @@ bool ioMainProcess::InitNetWork()
 		if( ioLocalManager::GetLocalType() == ioLocalManager::LCT_KOREA )
 		{
  
-			g_ConnectAssist.PushNode(&g_MgameBillingServer);
+			//g_ConnectAssist.PushNode(&g_MgameBillingServer);
  
 			//g_ConnectAssist.PushNode(&g_ToonilandBillingServer);
 
-			//g_ConnectAssist.PushNode(&g_WemadeBuyServer);
+			g_ConnectAssist.PushNode(&g_WemadeBuyServer);
 			
-			g_ConnectAssist.PushNode(&g_NexonSessionServer); 
+			//g_ConnectAssist.PushNode(&g_NexonSessionServer); 
 		}
 		else if( ioLocalManager::GetLocalType() == ioLocalManager::LCT_THAILAND )
 		{
@@ -439,10 +439,10 @@ bool ioMainProcess::InitNetWork()
 		if(IsTestMode())
 		{
 // 			g_ConnectAssist.PushNode(&g_ToonilandBillingServer);
-// 			g_ConnectAssist.PushNode(&g_WemadeBuyServer);
- 			g_ConnectAssist.PushNode(&g_MgameBillingServer);
+ 			g_ConnectAssist.PushNode(&g_WemadeBuyServer);
+ 			//g_ConnectAssist.PushNode(&g_MgameBillingServer);
 			
-			g_ConnectAssist.PushNode(&g_NexonSessionServer);
+			//g_ConnectAssist.PushNode(&g_NexonSessionServer);
 		}
 
 		g_ThreadPool.SetThreadPoolType( TPT_CHANNELING );
@@ -721,9 +721,9 @@ void ioMainProcess::Process(uint32& idleTime)
 	{
 		if( ioLocalManager::GetLocalType() == ioLocalManager::LCT_KOREA )
 		{
-			g_MgameBillingServer.ProcessTime();
+			//g_MgameBillingServer.ProcessTime();
 //			g_ToonilandBillingServer.ProcessTime();
-//			g_WemadeBuyServer.ProcessTime();
+			g_WemadeBuyServer.ProcessTime();
 		//	g_NexonSessionServer.ProcessTime();
 		}
 		else if( ioLocalManager::GetLocalType() == ioLocalManager::LCT_THAILAND )
@@ -762,8 +762,8 @@ void ioMainProcess::Process(uint32& idleTime)
 		if( ioLocalManager::GetLocalType() == ioLocalManager::LCT_KOREA )
 		{
 		//	g_ToonilandBillingServer.ProcessTime();//kyg test 때문에 켜논거 꼭 꺼야함 
-			g_MgameBillingServer.ProcessTime(); //kyg test 때문에 켜논거 꼭 꺼야함 
-		//	g_WemadeBuyServer.ProcessTime();//kyg test 때문에 켜논거 꼭 꺼야함 
+			//g_MgameBillingServer.ProcessTime(); //kyg test 때문에 켜논거 꼭 꺼야함 
+			g_WemadeBuyServer.ProcessTime();//kyg test 때문에 켜논거 꼭 꺼야함 
 		}
 		else if( ioLocalManager::GetLocalType() == ioLocalManager::LCT_EU )
 		{
@@ -1095,8 +1095,8 @@ void ioMainProcess::CrashDown()
 
 	if( ioLocalManager::GetLocalType() == ioLocalManager::LCT_KOREA )
 	{
-		g_MgameBillingServer.OnDestroy();
-		//g_WemadeBuyServer.OnDestroy();
+		//g_MgameBillingServer.OnDestroy();
+		g_WemadeBuyServer.OnDestroy();
 		//g_ToonilandBillingServer.OnDestroy();
 	}
 	else if( ioLocalManager::GetLocalType() == ioLocalManager::LCT_THAILAND )
