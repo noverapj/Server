@@ -1,0 +1,30 @@
+# Build output
+build/
+obj/
+.vs/
+*.suo
+*.user
+*.opensdf
+*.sdf
+*.vc.db
+*.vc.opendb
+*.aps
+*.pdb
+*.ilk
+*.idb
+*.tlog
+*.log
+*.unsuccessfulbuild
+*.lastbuildstate
+*.cache
+*.bmp
+*.iobj
+*.ipdb
+
+# Generated files
+Version.h
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
