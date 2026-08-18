@@ -31,14 +31,25 @@ Server-side source code for the Novera game project. This repository contains al
 ## Prerequisites
 
 - Visual Studio 2010 (or VS 2022 with v100 platform toolset)
-- Premake5 (beta 8)
 - Windows SDK 7.0A
+- Premake5 is auto-downloaded by `build.bat` (no manual install needed)
 
 ## Building
 
+### Quick start
+
 ```batch
-premake5.exe vs2010 --file=premake5.lua
-msbuild build\SourceServer.sln /p:Configuration=Debug /p:Platform=Win32 /p:PlatformToolset=v100 /m
+build.bat                    # Generate VS2010 project files (auto-downloads premake5)
+scripts\build.bat Debug       # Build solution (Debug)
+scripts\build.bat All         # Build Debug + Release
+```
+
+### Build single project
+
+```batch
+scripts\build_project.bat ls_gamesvr             # Debug (default)
+scripts\build_project.bat ls_billingsvr Release   # Release config
+scripts\build_project.bat                          # List available projects
 ```
 
 ## Directory Structure
