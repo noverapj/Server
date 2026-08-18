@@ -28,3 +28,6 @@ Version.h
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+tool/premake5.exe
+tool/premake5.zip
