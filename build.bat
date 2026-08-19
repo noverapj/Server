@@ -26,8 +26,8 @@ if not exist "%PREMAKE%" (
 echo premake5 downloaded to %PREMAKE%
 
 :run_premake
-echo Running premake5 vs2010...
-"%PREMAKE%" vs2010
+echo Running premake5 vs2022...
+"%PREMAKE%" vs2022
 if !ERRORLEVEL! neq 0 (
     echo [ERROR] premake5 failed
     exit /b 1
