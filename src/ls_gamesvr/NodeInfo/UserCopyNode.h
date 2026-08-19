@@ -2,7 +2,7 @@
 
 #include "UserParent.h"
 #include "CopyNodeParent.h"
-#include <boost/unordered/unordered_map.hpp>
+#include <unordered_map>
 
 class UserCopyNode : public UserParent,
 					 public CopyNodeParent					 
@@ -91,8 +91,8 @@ public:
 	virtual ~UserCopyNode();
 };
 
-typedef boost::unordered_map<DWORD, UserCopyNode*> uUserCopyNode;
+typedef std::unordered_map<DWORD, UserCopyNode*> uUserCopyNode;
 typedef uUserCopyNode::iterator uUserCopyNode_iter;
 
-typedef boost::unordered_map<std::string, DWORD> uUserCopyNodeTable;
+typedef std::unordered_map<std::string, DWORD> uUserCopyNodeTable;
 typedef uUserCopyNodeTable::iterator uUserCopyNodeTable_iter;

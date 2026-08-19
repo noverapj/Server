@@ -13,7 +13,6 @@
 
 #include "../DataBase/LogDBClient.h"
 #include <strsafe.h>
-#include <boost/foreach.hpp>
 #include "RoomNodeManager.h"
 
 TeamSurvivalAIMode::TeamSurvivalAIMode( Room *pCreator ) : Mode( pCreator )
@@ -875,7 +874,7 @@ void TeamSurvivalAIMode::OnEventSceneEnd( User *pSend, SP2Packet &rkPacket )
 int TeamSurvivalAIMode::GetCurTeamUserCnt( TeamType eTeam )
 {
 	int iNPCCnt = 0;
-	BOOST_FOREACH( NPCRecord& rMonster, m_vNPCList )
+	for( NPCRecord& rMonster : m_vNPCList )
 	{
 		if( rMonster.eTeam == eTeam )
 			iNPCCnt++;
@@ -1954,7 +1953,7 @@ void TeamSurvivalAIMode::LoadNPCInfo( ioINILoader &rkLoader )
 		vIndex.push_back( i+1 );
 
 	srand( timeGetTime() );
-	std::random_shuffle( vIndex.begin(), vIndex.end() );
+	std::shuffle( vIndex.begin(), vIndex.end(), std::mt19937(std::random_device()()) );
 
 	m_vNPCCodeList.clear();
 
@@ -1976,7 +1975,7 @@ void TeamSurvivalAIMode::LoadNPCInfo( ioINILoader &rkLoader )
 	for( int i=0; i<iMaxNPCCnt; ++i )
 		vIndex.push_back( i+1 );
 	srand( timeGetTime() );
-	std::random_shuffle( vIndex.begin(), vIndex.end() );	
+	std::shuffle( vIndex.begin(), vIndex.end(), std::mt19937(std::random_device()()) );
 	for( int i=0; i<iMaxNPCCnt; ++i )
 	{
 		int iNPCID = vIndex[i];
@@ -2198,7 +2197,7 @@ void TeamSurvivalAIMode::SpawnNPC( const DWORD dwMaxCount, bool bEnemy )
 
 	PACKET_GUARD_VOID_WRITE(kPacket, (int)vNPCList.size());
 
-	BOOST_FOREACH( NPCRecord& kMonster, vNPCList )
+	for( NPCRecord& kMonster : vNPCList )
 	{
 		PACKET_GUARD_VOID_WRITE(kPacket, kMonster.dwCode);
 		PACKET_GUARD_VOID_WRITE(kPacket, kMonster.dwMonsterID);
@@ -2276,7 +2275,7 @@ void TeamSurvivalAIMode::ReviveNPC()
 	std::vector< NPCRecord > vNPCList;
 	vNPCList.clear();
 
-	BOOST_FOREACH( NPCRecord& rkMonster, m_vNPCList )
+	for( NPCRecord& rkMonster : m_vNPCList )
 	{
 		if( rkMonster.eState == RS_DIE )
 		{
@@ -2299,7 +2298,7 @@ void TeamSurvivalAIMode::ReviveNPC()
 
 		PACKET_GUARD_VOID_WRITE(kPacket, (int)vNPCList.size());
 
-		BOOST_FOREACH( NPCRecord& rkMonster, vNPCList )
+		for( NPCRecord& rkMonster : vNPCList )
 		{
 			PACKET_GUARD_VOID_WRITE(kPacket, rkMonster.dwCode);
 			PACKET_GUARD_VOID_WRITE(kPacket, rkMonster.dwMonsterID);
@@ -2333,7 +2332,7 @@ DWORD TeamSurvivalAIMode::GetLiveMonsterCount( )
 {
 	int iMonsterCount = 0;
 
-	BOOST_FOREACH( NPCRecord& rMonster, m_vNPCList )
+	for( NPCRecord& rMonster : m_vNPCList )
 	{
 		if( rMonster.eState != RS_PLAY )
 			continue;
@@ -2348,7 +2347,7 @@ DWORD TeamSurvivalAIMode::GetDeadMonsterCount( )
 {
 	int iMonsterCount = 0;
 
-	BOOST_FOREACH( NPCRecord& rMonster, m_vNPCList )
+	for( NPCRecord& rMonster : m_vNPCList )
 	{
 		if( rMonster.eState != RS_DIE )
 			continue;
@@ -2361,7 +2360,7 @@ DWORD TeamSurvivalAIMode::GetDeadMonsterCount( )
 
 NPCRecord* TeamSurvivalAIMode::FindMonsterInfo( const ioHashString &rkName )
 {
-	BOOST_FOREACH( NPCRecord& rMonster, m_vNPCList )
+	for( NPCRecord& rMonster : m_vNPCList )
 	{
 		if( rMonster.szName == rkName )
 			return &rMonster;
@@ -2376,7 +2375,7 @@ void TeamSurvivalAIMode::RemoveRecordChangeMonsterSync( const ioHashString &rkRe
 
 	NPCRecordList RecordList;
 
-	BOOST_FOREACH( NPCRecord& rMonster, m_vNPCList )
+	for( NPCRecord& rMonster : m_vNPCList )
 	{
 		if( rMonster.szSyncUser == rkRemoveName )
 			rMonster.szSyncUser = SearchMonsterSyncUser();

@@ -43,7 +43,7 @@ struct BlockDefaultInfo
 };
 
 typedef std::vector<CoordinateInfo> BLOCKCOORDINATEINFO;
-typedef boost::unordered_map<DWORD, BLOCKCOORDINATEINFO> BLOCKPROPERTYGROUP;	// <itemCode, ioBlockProperty>
+typedef std::unordered_map<DWORD, BLOCKCOORDINATEINFO> BLOCKPROPERTYGROUP;	// <itemCode, ioBlockProperty>
 
 class ioBlockPropertyManager : public Singleton< ioBlockPropertyManager >
 {

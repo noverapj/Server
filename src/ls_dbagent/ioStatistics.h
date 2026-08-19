@@ -21,7 +21,7 @@ public:
 private:
 	typedef std::vector<int> PACKET_IDS;
 	typedef std::vector<int> PACKET_COUNTS;
-	typedef std::tr1::unordered_map<int,int> PACKET_STATISTICS;
+	typedef std::unordered_map<int,int> PACKET_STATISTICS;
 
 	PACKET_IDS m_vPacketIDs;
 	PACKET_COUNTS m_vPacketCounts;

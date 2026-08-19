@@ -3,16 +3,16 @@
 
 #include "LadderTeamNode.h"
 #include "LadderTeamCopyNode.h"
-#include "boost\unordered_map.hpp"
+#include <unordered_map>
 #include "LevelMatchManager.h"
 
 typedef vector< LadderTeamNode* > vLadderTeamNode;
 typedef vLadderTeamNode::iterator vLadderTeamNode_iter;
 
-typedef boost::unordered_map<DWORD, LadderTeamNode*> mLadderTeamNode;
+typedef std::unordered_map<DWORD, LadderTeamNode*> mLadderTeamNode;
 typedef mLadderTeamNode::iterator mLadderTeamNode_iter;
 
-typedef boost::unordered_map<DWORD, LadderTeamCopyNode*> mLadderTeamCopyNode;
+typedef std::unordered_map<DWORD, LadderTeamCopyNode*> mLadderTeamCopyNode;
 typedef mLadderTeamCopyNode::iterator mLadderTeamCopyNode_iter;
 
 typedef struct tagLadderTeamNodeSort
@@ -29,7 +29,7 @@ typedef struct tagLadderTeamNodeSort
 }LadderTeamNodeSort;
 
 typedef vector< LadderTeamNodeSort > vLadderTeamNodeSort;
-class SortLadderTeamNode : public std::binary_function< const LadderTeamNodeSort&, const LadderTeamNodeSort&, bool >
+class SortLadderTeamNode
 {
 public:
 	bool operator()( const LadderTeamNodeSort& lhs , const LadderTeamNodeSort& rhs ) const
@@ -68,7 +68,7 @@ typedef struct tagSortLadderTeam
 }SortLadderTeam;
 typedef vector< SortLadderTeam > vSortLadderTeam;
 typedef vSortLadderTeam::iterator vSortLadderTeam_iter;
-class LadderTeamSort : public std::binary_function< const SortLadderTeam&, const SortLadderTeam&, bool >
+class LadderTeamSort
 {
 public:
 	bool operator()( const SortLadderTeam &lhs , const SortLadderTeam &rhs ) const

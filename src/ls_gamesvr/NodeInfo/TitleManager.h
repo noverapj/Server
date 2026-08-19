@@ -44,7 +44,7 @@ public:
 	int GetAddPremiumTime() { return m_iAddPremiumTime; }
 
 protected:
-	typedef boost::unordered_map<DWORD, TitleData*> mTitleTable;
+	typedef std::unordered_map<DWORD, TitleData*> mTitleTable;
 	typedef mTitleTable::iterator mTitleTable_iter;
 
 	typedef std::vector<IntVec> vPremiumTable;

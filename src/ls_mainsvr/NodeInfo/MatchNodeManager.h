@@ -1,20 +1,20 @@
 #pragma once
-#include "boost\unordered_map.hpp"
+#include <unordered_map>
 
 class MatchNode;
 class MatchUser;
 
 typedef vector< MatchNode* > vMatchNode;
 typedef vMatchNode::iterator vMatchNode_iter;
-typedef boost::unordered_map<int, MatchNode*> mMatchNode;
+typedef std::unordered_map<int, MatchNode*> mMatchNode;
 typedef mMatchNode::iterator mMatchNode_iter;
 
 typedef vector< MatchUser* > vMatchUser;
 typedef vMatchUser::iterator vMatchUser_iter;
-typedef boost::unordered_map<int, MatchUser*> mMatchUser;
+typedef std::unordered_map<int, MatchUser*> mMatchUser;
 typedef mMatchUser::iterator mMatchUser_iter;
 
-typedef boost::unordered_multimap< int, MatchUser* > mUserMatchingMap;				// key : 유저 MMR 
+typedef std::unordered_multimap< int, MatchUser* > mUserMatchingMap;				// key : 유저 MMR 
 typedef mUserMatchingMap::iterator findIter;				// key : 유저 MMR 
 
 typedef struct tagMatchNodeSort
@@ -31,7 +31,7 @@ typedef struct tagMatchNodeSort
 }MatchNodeSort;
 
 typedef vector< MatchNodeSort > vMatchNodeSort;
-class SortMatchNode : public std::binary_function< const MatchNodeSort&, const MatchNodeSort&, bool >
+class SortMatchNode
 {
 public:
 	bool operator()( const MatchNodeSort& lhs , const MatchNodeSort& rhs ) const

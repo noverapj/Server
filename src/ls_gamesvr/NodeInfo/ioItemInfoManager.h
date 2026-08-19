@@ -277,7 +277,7 @@ private:
 
 	typedef std::vector< PriceData* > vPriceData; // vector을 다른것으로 대체할때 INI Reload 개선 필요
 
-	class PriceDataSort : public std::binary_function< const PriceData*, const PriceData*, bool >
+	class PriceDataSort
 	{
 	public:
 		bool operator()( const PriceData *lhs , const PriceData *rhs ) const
@@ -337,7 +337,7 @@ private:
 public:
 	bool LoadPriceInfo( const char *szFileName, bool bCreateLoad = true );
 	//void SetWeekBuyCntAndPeso( int iBuyPeso[ioItemPriceManager::DB_LOAD_COUNT] );
-	void SetWeekBuyCntAndPeso( boost::unordered_map<int, int>& mClassPrice );
+	void SetWeekBuyCntAndPeso( std::unordered_map<int, int>& mClassPrice );
 
 public:
 	int GetSubscriptionType( int iClassType );

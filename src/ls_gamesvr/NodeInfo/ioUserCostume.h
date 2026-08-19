@@ -45,7 +45,7 @@ public:
 	void SendAllCostumeInfo();
 
 protected:
-	typedef boost::unordered_map<DWORD, Costume> UserCostumeItem;	//<인덱스, 해당아이템>
+	typedef std::unordered_map<DWORD, Costume> UserCostumeItem;	//<인덱스, 해당아이템>
 
 protected:
 	User* m_pUser;

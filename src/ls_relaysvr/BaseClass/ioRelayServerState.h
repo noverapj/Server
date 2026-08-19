@@ -1,7 +1,6 @@
 #pragma once
 
-
-#include <boost/thread/mutex.hpp>
+#include <chrono>
 #include "CPU.h"
 
 
@@ -97,9 +96,8 @@ protected:
 	long m_testSendCount;
 
 protected:
-	boost::timer m_elaplsedTime;
-	boost::timer m_startTime;
-	boost::mutex m_lock;
+	std::chrono::steady_clock::time_point m_elaplsedTime;
+	std::chrono::steady_clock::time_point m_startTime;
 	int m_sys;
 	CPU m_cpuTime;
 	bool m_timestate;

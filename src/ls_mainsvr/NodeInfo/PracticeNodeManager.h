@@ -1,12 +1,12 @@
 #ifndef _PracticeNodeManager_h_
 #define _PracticeNodeManager_h_
-#include "boost\unordered_map.hpp"
+#include <unordered_map>
 
 
 class CPracticeNode;
 class ServerNode;
 
-typedef boost::unordered_map<int, CPracticeNode * > mPracticeNode;
+typedef std::unordered_map<int, CPracticeNode * > mPracticeNode;
 typedef mPracticeNode::iterator mPracticeNode_iter;
 
 const int PracticeSectionCount = 4;

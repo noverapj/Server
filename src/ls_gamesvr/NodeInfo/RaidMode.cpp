@@ -1786,7 +1786,7 @@ void RaidMode::TreasureCardStop( User *pUser )
 	PACKET_GUARD_VOID_WRITE(kPacket, iRemainCount);
 
 	if( !pRecord->m_vTreasureCard.empty() )
-		std::random_shuffle( pRecord->m_vTreasureCard.begin(), pRecord->m_vTreasureCard.end() );
+		std::shuffle( pRecord->m_vTreasureCard.begin(), pRecord->m_vTreasureCard.end(), std::mt19937(std::random_device()()) );
 
 
 	CreateTreasureCardIndex(pRecord->GetAllPlayingTime());
@@ -2969,7 +2969,7 @@ void RaidMode::GenerateHunterCoin(int coinCnt)
 
 void RaidMode::ShuffleHunterCoin()
 {
-	std::random_shuffle( m_vHunterCoinRegenPos.begin(), m_vHunterCoinRegenPos.end() );
+	std::shuffle( m_vHunterCoinRegenPos.begin(), m_vHunterCoinRegenPos.end(), std::mt19937(std::random_device()()) );
 }
 
 

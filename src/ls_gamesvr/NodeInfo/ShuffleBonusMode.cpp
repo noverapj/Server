@@ -177,7 +177,7 @@ void ShuffleBonusMode::LoadShuffleStarPosInfo()
 		m_vShuffleStarRegenPos.push_back( kStarInfo );
 
 	}
-	std::random_shuffle( m_vShuffleStarRegenPos.begin(), m_vShuffleStarRegenPos.end() );
+		std::shuffle( m_vShuffleStarRegenPos.begin(), m_vShuffleStarRegenPos.end(), std::mt19937(std::random_device()()) );
 	std::copy( m_vShuffleStarRegenPos.begin(), m_vShuffleStarRegenPos.end(), std::back_inserter( m_vBuffItemCreatePos ) );	
 }
 
@@ -196,7 +196,7 @@ void ShuffleBonusMode::SetStartPosArray()
 		m_SingleTeamPosArray.push_back(i);
 	}
 
-	std::random_shuffle( m_SingleTeamPosArray.begin(), m_SingleTeamPosArray.end() );
+	std::shuffle( m_SingleTeamPosArray.begin(), m_SingleTeamPosArray.end(), std::mt19937(std::random_device()()) );
 
 	m_iBluePosArray = m_SingleTeamPosArray[0];
 	m_iRedPosArray  = m_SingleTeamPosArray[1];
@@ -893,7 +893,7 @@ void ShuffleBonusMode::ProcessGenerateBonusStar()
 	if( m_iCurStarRegenPos >= m_iMaxStarRegenPos )
 	{
 		m_iCurStarRegenPos = 0;
-		std::random_shuffle( m_vShuffleStarRegenPos.begin(), m_vShuffleStarRegenPos.end() );
+	std::shuffle( m_vShuffleStarRegenPos.begin(), m_vShuffleStarRegenPos.end(), std::mt19937(std::random_device()()) );
 	}
 
 	DestoryModeItemByStar();
@@ -912,7 +912,7 @@ void ShuffleBonusMode::ProcessGenerateBuffItem()
 	if( !pItem )
 		return;
 		
-	std::random_shuffle( m_vBuffItemCreatePos.begin(), m_vBuffItemCreatePos.end() );
+		std::shuffle( m_vBuffItemCreatePos.begin(), m_vBuffItemCreatePos.end(), std::mt19937(std::random_device()()) );
 
 	pItem->m_fXPos = m_vBuffItemCreatePos[0].m_fXPos;
 	pItem->m_fZPos = m_vBuffItemCreatePos[0].m_fZPos;
@@ -960,7 +960,7 @@ void ShuffleBonusMode::ProcessRegenBuffItem()
 		//기획자의 요청에 의해서 랜덤리젠 형태로 변경
 		//pItem->m_fXPos = rkInfo.m_fXPos;
 		//pItem->m_fZPos = rkInfo.m_fZPos;
-		std::random_shuffle( m_vBuffItemCreatePos.begin(), m_vBuffItemCreatePos.end() );
+	std::shuffle( m_vBuffItemCreatePos.begin(), m_vBuffItemCreatePos.end(), std::mt19937(std::random_device()()) );
 
 		pItem->m_fXPos = m_vBuffItemCreatePos[0].m_fXPos;
 		pItem->m_fZPos = m_vBuffItemCreatePos[0].m_fZPos;

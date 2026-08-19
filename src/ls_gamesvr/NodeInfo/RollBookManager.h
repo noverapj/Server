@@ -79,9 +79,9 @@ public:
 
 protected:
 	typedef std::vector<RewardInfo> RewardVector;
-	typedef boost::unordered_map<DWORD, RewardVector> AllRewardTable;
-	//typedef boost::unordered_map<DWORD, DWORD> NextTableInfo;
-	typedef boost::unordered_map<DWORD, RollBookInfo> RollBookTable;
+	typedef std::unordered_map<DWORD, RewardVector> AllRewardTable;
+	//typedef std::unordered_map<DWORD, DWORD> NextTableInfo;
+	typedef std::unordered_map<DWORD, RollBookInfo> RollBookTable;
 
 protected:
 	int m_iRenewalHour;

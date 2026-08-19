@@ -1,5 +1,8 @@
 #pragma once
 
+#include <mutex>
+#include <condition_variable>
+
 typedef Singleton<LSPacketQueue>			S_Queue;
 typedef Singleton<IOCPHandler>				S_Iocp;
 typedef Singleton<ioConfiguration>			S_Conf;
@@ -8,7 +11,16 @@ typedef Singleton<ioRelayServerBind>		S_RelayServer;
 typedef Singleton<MonitorsManager>			S_MonitorsManager;
 typedef Singleton<ioRelayServerState>		S_ioRelayServerState;
 typedef Singleton<ioTestClass>				S_Test;
-typedef Singleton<boost::asio::io_service>	S_IoServices;
+
+struct ServiceStopSignal {
+	std::mutex mtx;
+	std::condition_variable cv;
+	bool stopped = false;
+	void stop() { std::lock_guard<std::mutex> lk(mtx); stopped = true; cv.notify_all(); }
+	void wait() { std::unique_lock<std::mutex> lk(mtx); cv.wait(lk, [this] { return stopped; }); }
+};
+typedef Singleton<ServiceStopSignal>		S_IoServices;
+
 typedef Singleton<ServerConnectorMgr>		S_ServerConnectMgr;
 typedef Singleton<OpMemPool>				S_OPMemPool;
 typedef Singleton<LSTimerMgr>				S_TimerMgr;
@@ -34,6 +46,3 @@ typedef Singleton<RelayServerUDPNode>		S_RelayServerUDPNode;
 #define  g_ConnectAssist()					S_ConnectAssist::instance()
 #define  g_UDPNode()						S_RelayServerUDPNode::instance()
 #define  g_UDPModule()						S_RelayServerUDPModule::instance()
- 
-
-

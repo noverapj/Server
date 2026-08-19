@@ -1,5 +1,6 @@
-#pragma once 
+#pragma once
 
+#include <map>
 
 class ioPacketChecker
 {
@@ -14,7 +15,7 @@ protected:
 			m_iPacketCount = 0;
 		}
 	};
-	class PacketDataSort : public std::binary_function< const PacketData&, const PacketData&, bool >
+	class PacketDataSort
 	{
 	public:
 		bool operator()( const PacketData &lhs , const PacketData &rhs ) const

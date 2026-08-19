@@ -15,8 +15,8 @@ ioTestClass::~ioTestClass(void)
 
 void ioTestClass::Run()
 {
-	boost::thread tTest(&ioTestClass::svc,this);
-	//tTest.join();
+	std::thread tTest(&ioTestClass::svc, this);
+	tTest.detach();
 }
 
 void ioTestClass::testfunc()
@@ -43,7 +43,9 @@ void ioTestClass::svc()
 		{
 		case '0':
 			for(int i=0; i<2; ++i)
-				boost::thread(&ioTestClass::testfunc,this);
+			{
+				std::thread(&ioTestClass::testfunc, this).detach();
+			}
 			break;
 		case '1':
 			{	

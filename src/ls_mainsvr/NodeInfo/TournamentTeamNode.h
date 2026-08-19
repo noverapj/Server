@@ -68,7 +68,7 @@ public:
 };
 
 // 래더 포인트로 팀 정렬
-class TournamentTeamSort : public std::binary_function< const TournamentTeamNode *, const TournamentTeamNode *, bool >
+class TournamentTeamSort
 {
 public:
 	bool operator()( const TournamentTeamNode *lhs , const TournamentTeamNode *rhs ) const

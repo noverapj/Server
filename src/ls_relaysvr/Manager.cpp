@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Manager.h"
 #include "UserDefineSingleton.h"
+#include <iostream>
 
 extern void ShutDown();
 
@@ -68,6 +69,9 @@ bool Manager::Init()
 #endif	
 	timeBeginPeriod(1);
 	
+	if(!BeginSocket())
+		return false;
+
 	if(!g_Config()->Init())
 		return false;
 	SetTcpLog();

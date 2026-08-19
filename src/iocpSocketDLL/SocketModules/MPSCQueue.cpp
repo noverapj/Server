@@ -22,7 +22,7 @@ BOOL MPSCQueue::Init()
 
 BOOL MPSCQueue::Enqueue( NodeData* node )
 {
-	NodeEntry* prev = reinterpret_cast<NodeEntry*>(InterlockedExchangePointer((void*)(&m_head), (void*)(&node->m_nodeEntry)));
+	NodeEntry* prev = reinterpret_cast<NodeEntry*>(InterlockedExchangePointer((PVOID*)&m_head, (PVOID)&node->m_nodeEntry));
 	prev->next = &(node->m_nodeEntry);
 	InterlockedIncrement(&m_count);
 	return TRUE;
@@ -31,7 +31,7 @@ BOOL MPSCQueue::Enqueue( NodeData* node )
 void MPSCQueue::PushNode( NodeEntry* element )
 {
 	element->next = NULL;
-	NodeEntry* prev = reinterpret_cast<NodeEntry*>(InterlockedExchangePointer((void*)(&m_head), element));
+	NodeEntry* prev = reinterpret_cast<NodeEntry*>(InterlockedExchangePointer((PVOID*)&m_head, element));
 	prev->next = element;
 }
 

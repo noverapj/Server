@@ -37,7 +37,7 @@ public:
 	void DoTrigger(const MissionClasses eMissionClass, User* pUser, DWORDVec& vValues, BOOL bMacro = FALSE);
 
 protected:
-	typedef boost::unordered_map<DWORD, Mission*> mCurMissionTable;
+	typedef std::unordered_map<DWORD, Mission*> mCurMissionTable;
 	void DeleteDailyMissionTable();
 	void DeleteWeeklyMissionTable();
 	void DeleteMonthlyMissionTable();

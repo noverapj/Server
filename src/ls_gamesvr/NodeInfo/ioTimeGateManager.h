@@ -84,7 +84,7 @@ public:
 
 
 //내림차순 정렬
-class TimeGateRewardRandomSort : public std::binary_function< const ioTimeGateManager::TimeGateInfo&, const ioTimeGateManager::TimeGateInfo&, bool >
+class TimeGateRewardRandomSort
 {
 public:
 	bool operator()( const ioTimeGateManager::TimeGateInfo &lhs , const ioTimeGateManager::TimeGateInfo &rhs ) const
@@ -96,7 +96,7 @@ public:
 };
 
 //오름차순
-class TimeGateRewardAscSort : public std::binary_function< const ioTimeGateManager::TimeGateInfo&, const ioTimeGateManager::TimeGateInfo&, bool >
+class TimeGateRewardAscSort
 {
 public:
 	bool operator()( const ioTimeGateManager::TimeGateInfo &lhs , const ioTimeGateManager::TimeGateInfo &rhs ) const

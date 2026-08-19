@@ -186,7 +186,7 @@ void ioBingoManager::GetBingoReward( vector< stRewardData >& rReward )
 				}
 
 				// ¼¯±â
-				random_shuffle( rReward.begin(), rReward.end() );
+				std::shuffle( rReward.begin(), rReward.end(), std::mt19937(std::random_device()()) );
 			}
 
 			// ¿Ãºù°í ¼±¹°

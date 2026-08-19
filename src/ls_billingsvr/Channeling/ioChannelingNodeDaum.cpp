@@ -937,8 +937,9 @@ void ioChannelingNodeDaum::UTF8ToAnsi( IN const char *szUTF8, OUT char *szAnsi, 
 }
 
 //------------------------------------------------------------------------------------------------DAUM
-#include "openssl/sha.h"
-#include "openssl/hmac.h"
+#include <bcrypt.h>
+
+#define SHA_DIGEST_LENGTH 20
 
 #pragma warning (disable : 4996)
 #pragma warning (disable : 4554)
@@ -979,9 +980,8 @@ char *ioChannelingNodeDaum::getSig(char *apiKey, char* data, char* ts, char* non
 	char *orgStr = (char*)malloc(orgLen);
 	char *digestStr = (char*)malloc(SHA_DIGEST_LENGTH*2 + 1);
 	char decodeApiKey[80];
-	char *md;
-	char tmp[80];
-	char c[80];
+	unsigned char md[SHA_DIGEST_LENGTH];
+	char tmp[SHA_DIGEST_LENGTH*2 + 1];
 
 	strncpy_s(orgStr,orgLen, data, strlen(data)+1);
 	strncat_s(orgStr,orgLen, ts, strlen(ts)+1);
@@ -989,12 +989,16 @@ char *ioChannelingNodeDaum::getSig(char *apiKey, char* data, char* ts, char* non
 
 	decode((unsigned char*)apiKey, (unsigned char*)decodeApiKey);
 
-	md =(char*) HMAC(EVP_sha1(),
-		decodeApiKey, strlen(decodeApiKey),
-		(const unsigned char*)orgStr, strlen(orgStr),
-		(unsigned char*)c, NULL);
+	BCRYPT_ALG_HANDLE hAlg = NULL;
+	BCRYPT_HASH_HANDLE hHash = NULL;
+	BCryptOpenAlgorithmProvider(&hAlg, BCRYPT_SHA1_ALGORITHM, NULL, BCRYPT_ALG_HANDLE_HMAC_FLAG);
+	BCryptCreateHash(hAlg, &hHash, NULL, 0, (PUCHAR)decodeApiKey, (ULONG)strlen(decodeApiKey), 0);
+	BCryptHashData(hHash, (PUCHAR)orgStr, (ULONG)strlen(orgStr), 0);
+	BCryptFinishHash(hHash, md, sizeof(md), 0);
+	BCryptDestroyHash(hHash);
+	BCryptCloseAlgorithmProvider(hAlg, 0);
 
-	strncpy_s(digestStr,SHA_DIGEST_LENGTH*2 + 1, pt((unsigned char *)md, tmp), SHA_DIGEST_LENGTH*2);
+	strncpy_s(digestStr,SHA_DIGEST_LENGTH*2 + 1, pt(md, tmp), SHA_DIGEST_LENGTH*2);
 	digestStr[SHA_DIGEST_LENGTH*2] = '\0';
 
 	free(orgStr);

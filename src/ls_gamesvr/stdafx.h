@@ -63,6 +63,7 @@
 
 #include <algorithm>
 #include <functional>
+#include <random>
 #include <utility>
 #include <limits>
 #include <strsafe.h>
@@ -96,9 +97,9 @@
 
 //#define NPROTECT
 //#define NPROTECT_CSAUTH3
-#ifndef NPROTECT
-	#define XTRAP
-#endif
+//#ifndef NPROTECT
+//	#define XTRAP
+//#endif
 
 // TODO: 프로그램에 필요한 추가 헤더는 여기에서 참조합니다.
 #include "../include/common.h"

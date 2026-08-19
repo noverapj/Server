@@ -36,7 +36,7 @@ void ioUserPractice::InitData()
 	m_mapPracticeList.clear();
 	m_vPracticeRankList.clear();
 
-	m_PracticeEndTime = boost::posix_time::microsec_clock::local_time();
+	m_PracticeEndTime = std::chrono::system_clock::now();
 	m_iAbusingCount = 0;
 
 	if(NULL != m_pUser)

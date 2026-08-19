@@ -1,7 +1,7 @@
 #pragma once
 
 //#include <map>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 class ioTimeStamp
 {
@@ -19,7 +19,7 @@ protected:
 	DWORD GetTimeStamp(const int ID);
 
 protected:
-	typedef boost::unordered_map<int,DWORD> TIMESTAMP_MAP;
+	typedef std::unordered_map<int,DWORD> TIMESTAMP_MAP;
 
 	TIMESTAMP_MAP m_TimeStampMap;
 

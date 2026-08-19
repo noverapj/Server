@@ -1119,11 +1119,11 @@ DWORD ioItemPriceManager::GetArrayClassCode( int iArray )
 	return pPrice->m_iSetCode;
 }
 
-void ioItemPriceManager::SetWeekBuyCntAndPeso( boost::unordered_map<int, int>& mClassPrice )
+void ioItemPriceManager::SetWeekBuyCntAndPeso( std::unordered_map<int, int>& mClassPrice )
 {
 	int i	     = 0;
 	int iMaxClass = m_vPriceList.size();
-	boost::unordered_map<int, int>::iterator it;
+	std::unordered_map<int, int>::iterator it;
 
 	for(i = 0;i < iMaxClass;i++)
 	{

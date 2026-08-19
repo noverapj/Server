@@ -217,7 +217,7 @@ struct AlchemicFuncInfo
 };
 typedef std::vector< AlchemicFuncInfo > vAlchemicFuncInfoList;
 
-class PeriodInfoSort : public std::binary_function< const NewAlchemicPeriodInfo&, const NewAlchemicPeriodInfo&, bool >
+class PeriodInfoSort
 {
 public:
 	bool operator()( const NewAlchemicPeriodInfo &lhs , const NewAlchemicPeriodInfo &rhs ) const

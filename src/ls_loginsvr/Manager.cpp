@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Manager.h"
 #include "UserDefineSingleton.h"
+#include <iostream>
 
  
 BOOL ConsoleHandler(DWORD fdwCtrlType) 
@@ -43,6 +44,9 @@ bool Manager::Init()
   //  S_Test::instance()->Run();
 #endif
 	timeBeginPeriod(1);
+
+	if(!BeginSocket())
+		return false;
 
 	if(!g_Config()->Init())
 		return false;

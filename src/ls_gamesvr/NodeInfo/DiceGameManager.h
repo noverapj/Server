@@ -35,11 +35,11 @@ public:
 protected:
 
 	typedef std::vector<SnakeLadders_Move> vecSNAKELADDER_MOVE;
-	typedef boost::unordered_map<SHORT, vecSNAKELADDER_MOVE> mapSNAKELADDER_MOVE_INFO;
+	typedef std::unordered_map<SHORT, vecSNAKELADDER_MOVE> mapSNAKELADDER_MOVE_INFO;
 
 	typedef std::vector<SnakeLadders_Reward> vecSNAKELADDER_REWARD;
-	typedef boost::unordered_map<int, vecSNAKELADDER_REWARD> mapSNAKELADDER_REWARD_INFO;
-	//typedef boost::unordered_map<int, vecSNAKELADDER_REWARD> mapSNAKELADDER_REWARD_INFO;
+	typedef std::unordered_map<int, vecSNAKELADDER_REWARD> mapSNAKELADDER_REWARD_INFO;
+	//typedef std::unordered_map<int, vecSNAKELADDER_REWARD> mapSNAKELADDER_REWARD_INFO;
 	
 
 

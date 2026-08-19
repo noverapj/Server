@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../BoostPooler.h"
-#include <boost/unordered/unordered_map.hpp>
+#include <unordered_map>
 
 struct ArrayIndexInfo
 {
@@ -81,7 +81,7 @@ protected:
 	//type  DEGtoRAD (type val) {return (type) (val * 3.14159265 / 180);}
 
 protected:
-	typedef boost::unordered_map<__int64, ioBlockDBItem*> BLOCKINFOS;
+	typedef std::unordered_map<__int64, ioBlockDBItem*> BLOCKINFOS;
 
 protected:
 	BLOCKINFOS	m_mBlockInfos;

@@ -1275,6 +1275,7 @@ bool SP2Packet::Read( Quaternion &arg )
 	return true;
 }
 
+#ifdef NPROTECT
 bool SP2Packet::Read(NProtectPacket& arg)
 {
 	DWORD dwStructSize = 0;
@@ -1292,6 +1293,7 @@ bool SP2Packet::Read(NProtectPacket& arg)
 
 	return true;
 }
+#endif
 
 void SP2Packet::GetStringOfStream(std::string & str)
 {

@@ -97,7 +97,7 @@ typedef struct tagMatchUserSort
 
 typedef vector< MatchUserSort > vMatchUserSort;
 
-class SortMatchUser : public std::binary_function< const MatchUserSort&, const MatchUserSort&, bool >
+class SortMatchUser
 {
 public:
 	bool operator()( const MatchUserSort& lhs , const MatchUserSort& rhs ) const
@@ -146,7 +146,7 @@ public:
 
 
 //내림차순 정렬
-class MatchSort : public std::binary_function< const MatchUser*, const MatchUser*, bool >
+class MatchSort
 {
 public:
 	bool operator()( const MatchUser *lhs , const MatchUser *rhs ) const

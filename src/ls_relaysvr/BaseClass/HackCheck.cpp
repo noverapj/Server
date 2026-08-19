@@ -10,10 +10,8 @@
 #else if RELEASE
 #pragma comment( lib, "../lib/INI.lib" )
 #endif
-#else
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/ini_parser.hpp>
 #endif
+
 namespace HackCheck
 {
 	static DWORD m_dwSpeedHackLessTime;

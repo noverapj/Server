@@ -19,7 +19,7 @@ public:
 	void		PutConnectData(int opid,SVRCONNECTINFO_& addr,LSConnector* node = NULL);
 
 protected:
-	boost::locking_queue<Connect_*> m_queue;
+	locking_queue<Connect_*> m_queue;
 	//MemPooler<LSConnector>    m_memPool;
 	MemPooler<LSConnector>    m_memPool;
 };

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ioPacketChecker.h"
+#include <algorithm>
  
  
 ioPacketChecker::ioPacketChecker() : m_currentTime(0), m_dwCheckerPassTime(0), m_iMaxLogCount(0), m_iFreezingPacketSessionCount(0), m_iFreezingPacketQueryCount(0), m_bFreezing(false)

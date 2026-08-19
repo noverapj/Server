@@ -2,6 +2,8 @@
 #ifndef _ioUserPractice_h_
 #define _ioUserPractice_h_
 
+#include <chrono>
+
 class User;
 class CQueryResultData;
 
@@ -55,7 +57,7 @@ struct SPracticeRank
 	}
 };
 
-typedef boost::unordered_map<DWORD, SPractice> MAPPRACTICE;
+typedef std::unordered_map<DWORD, SPractice> MAPPRACTICE;
 typedef MAPPRACTICE::iterator MAPPRACTICE_iter;
 
 class ioUserPractice
@@ -72,7 +74,7 @@ private:
 	bool					m_bSendRank;
 	bool					m_bApplyMove;
 
-	boost::posix_time::ptime m_PracticeEndTime;
+	std::chrono::system_clock::time_point m_PracticeEndTime;
 	int						m_iAbusingCount;
 
 public:
@@ -111,8 +113,8 @@ public:
 	void	SetApplyMove(bool bApplyMove);
 	bool	IsApplyMove();
 
-	void SetBoostPracticeEndTime( boost::posix_time::ptime PracticeEndTime ){	m_PracticeEndTime = PracticeEndTime;	}
-	boost::posix_time::ptime GetBoostPracticeEndTime(){	return m_PracticeEndTime;	}
+	void SetBoostPracticeEndTime( std::chrono::system_clock::time_point PracticeEndTime ){	m_PracticeEndTime = PracticeEndTime;	}
+	std::chrono::system_clock::time_point GetBoostPracticeEndTime(){	return m_PracticeEndTime;	}
 
 	void SetAbusingCount( int iAbusingCount ) { m_iAbusingCount = iAbusingCount; }
 	int GetAbusingCount()	{	return m_iAbusingCount;		}

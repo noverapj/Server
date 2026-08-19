@@ -34,8 +34,8 @@ enum ACCOUNT_TYPE
 typedef vector< SortUser > vSortUser;
 typedef vSortUser::iterator vSortUser_iter;
 
-class UserSort : public std::binary_function< const SortUser&, const SortUser&, bool >
-{
+class UserSort
+	{
 public:
 	bool operator()( const SortUser &lhs , const SortUser &rhs ) const
 	{
@@ -56,7 +56,7 @@ public:
 	}
 };
 
-typedef boost::unordered_map<DWORD,User*> uUser;
+typedef std::unordered_map<DWORD,User*> uUser;
 typedef uUser::iterator uUser_iter;
 
 typedef vector<User*> vUser;

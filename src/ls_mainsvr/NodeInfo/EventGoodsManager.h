@@ -1,6 +1,6 @@
 #pragma once
 
-#include <boost/unordered/unordered_map.hpp>
+#include <unordered_map>
 #include "../BoostPooler.h"
 
 class ServerNode;
@@ -94,7 +94,7 @@ public:
 		}
 
 	protected:
-		typedef boost::unordered_map<DWORD,int> BUYTABLE;
+		typedef std::unordered_map<DWORD,int> BUYTABLE;
 		BUYTABLE m_EventShop;
 		BUYTABLE m_CloverShop;
 	};
@@ -163,7 +163,7 @@ protected:
 		return NULL;
 	}
 
-	typedef boost::unordered_map<DWORD,UserBuyData*> USERBUYTABLE;
+	typedef std::unordered_map<DWORD,UserBuyData*> USERBUYTABLE;
 	USERBUYTABLE m_UserBuyList;
 
 protected:

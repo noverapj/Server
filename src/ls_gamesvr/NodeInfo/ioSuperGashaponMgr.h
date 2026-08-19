@@ -54,7 +54,7 @@ protected:
 		}
 	};
 
-	class SuperGashaponPackageSort : public std::binary_function< const SuperGashaponPackageSort&, const SuperGashaponPackageSort&, bool >
+	class SuperGashaponPackageSort
 	{
 	public:
 		bool operator()( const SuperGashaponPackage &lhs , const SuperGashaponPackage &rhs ) const

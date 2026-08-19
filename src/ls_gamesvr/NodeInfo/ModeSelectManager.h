@@ -30,7 +30,7 @@ struct SubSelectModeInfo
 	{
 		if( m_vMapList.empty() ) return;
 
-		std::random_shuffle( m_vMapList.begin(), m_vMapList.end() );
+		std::shuffle( m_vMapList.begin(), m_vMapList.end(), std::mt19937(std::random_device()()) );
 	}
 };
 typedef std::vector< SubSelectModeInfo > SubSelectModeInfoList;
@@ -56,7 +56,7 @@ struct SelectModeInfo
 	{
 		if( m_vSubModeList.empty() ) return;
 
-		std::random_shuffle( m_vSubModeList.begin(), m_vSubModeList.end() );
+		std::shuffle( m_vSubModeList.begin(), m_vSubModeList.end(), std::mt19937(std::random_device()()) );
 	}
 
 	void InitSubModeList()

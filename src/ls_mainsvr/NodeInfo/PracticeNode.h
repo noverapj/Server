@@ -1,7 +1,7 @@
 #ifndef _PracticeNode_h_
 #define _PracticeNode_h_
 #pragma once
-#include "boost\unordered_map.hpp"
+#include <unordered_map>
 
 
 #include "PracticeNodeManager.h"
@@ -48,7 +48,7 @@ private:
 
 
 // 래더 포인트로 팀 정렬
-class PracticerSort : public std::binary_function< Practicer*, Practicer*, bool >
+class PracticerSort
 {
 public:
 	bool operator()( Practicer* lhs , Practicer* rhs ) const
@@ -69,7 +69,7 @@ public:
 	}
 };
 
-typedef boost::unordered_map<DWORD, Practicer* > mPracticer;
+typedef std::unordered_map<DWORD, Practicer* > mPracticer;
 typedef std::vector<Practicer*> vPracticer;
 typedef mPracticer::iterator mPracticer_iter;
 typedef std::pair<DWORD, Practicer*> mypair;

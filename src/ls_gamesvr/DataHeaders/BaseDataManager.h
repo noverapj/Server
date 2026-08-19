@@ -1,6 +1,6 @@
 #pragma once
 
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #include "ioExcelReader.h"
 
 //--------------------------------------------------
@@ -16,7 +16,7 @@ public:
 template <typename TKey, typename TData>
 class BaseDataManager : public IBaseData
 {
-    typedef boost::unordered_map<TKey, TData*> MAPDATA;
+    typedef std::unordered_map<TKey, TData*> MAPDATA;
 
 public:
 	BaseDataManager();
@@ -192,7 +192,7 @@ TData* BaseDataManager<TKey, TData>::GetAt(int nIndex)
 template <typename TKey, typename TData>
 TData* BaseDataManager<TKey, TData>::GetData(TKey nKeyVal)
 {
-	boost::unordered_map<TKey, TData*>::iterator it;
+	std::unordered_map<TKey, TData*>::iterator it;
 	it = m_mapData.find(nKeyVal);
 	if (it != m_mapData.end())
 	{
@@ -220,7 +220,7 @@ void BaseDataManager<TKey, TData>::Release()
 }
 
 template <typename TKey, typename TData>
-boost::unordered_map<TKey, TData*>& BaseDataManager<TKey, TData>::GetMapData()
+std::unordered_map<TKey, TData*>& BaseDataManager<TKey, TData>::GetMapData()
 {
     return m_mapData;
 }

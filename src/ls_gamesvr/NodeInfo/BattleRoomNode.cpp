@@ -4174,7 +4174,7 @@ void BattleRoomNode::SendBattleModeSelectInfo(UserParent *pUser)
 		m_vBMCopyUserNode.push_back(CopyUserNode);
 	}
 
-	random_shuffle( m_vBMCopyUserNode.begin(), m_vBMCopyUserNode.end() );
+	std::shuffle( m_vBMCopyUserNode.begin(), m_vBMCopyUserNode.end(), std::mt19937(std::random_device()()) );
 
 	if( 1 == GetSelectMap() )
 	{

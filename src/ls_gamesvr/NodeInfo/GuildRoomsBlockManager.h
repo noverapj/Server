@@ -1,6 +1,6 @@
 #pragma once
 
-#include <boost/unordered/unordered_map.hpp>
+#include <unordered_map>
 #include "ioBlockPropertyManager.h"
 
 class GuildRoomInfos;
@@ -58,7 +58,7 @@ public:
 	void SendBlockVerifyInfo(const DWORD dwGuildIndex, User* pUser);
 
 protected:
-	typedef boost::unordered_map<DWORD, GuildRoomInfos*> GUILDBLOCKINFOS;
+	typedef std::unordered_map<DWORD, GuildRoomInfos*> GUILDBLOCKINFOS;
 	typedef std::vector<BlockDefaultInfo> DEFAULTCONSTRUCTINFO;
 
 protected:

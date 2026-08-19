@@ -141,7 +141,7 @@ void FightClubMode::LoadFightNPCInfo( ioINILoader &rkLoader )
 			vIndex.push_back( i );
 		}
 
-		std::random_shuffle( vIndex.begin(), vIndex.end() );
+		std::shuffle( vIndex.begin(), vIndex.end(), std::mt19937(std::random_device()()) );
 
 
 		char szTitle[MAX_PATH];
@@ -177,7 +177,7 @@ void FightClubMode::SetStartPosArray()
 		m_SingleTeamPosArray.push_back(i);
 	}
 
-	std::random_shuffle( m_SingleTeamPosArray.begin(), m_SingleTeamPosArray.end() );
+	std::shuffle( m_SingleTeamPosArray.begin(), m_SingleTeamPosArray.end(), std::mt19937(std::random_device()()) );
 
 	m_iBluePosArray = m_SingleTeamPosArray[0];
 	m_iRedPosArray  = m_SingleTeamPosArray[1];

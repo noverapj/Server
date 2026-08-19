@@ -518,7 +518,7 @@ MinidumpGenerator::UuidCreateType MinidumpGenerator::GetCreateUuid() {
   return create_uuid_;
 }
 
-bool MinidumpGenerator::GenerateDumpFilePath(string* file_path) {
+bool MinidumpGenerator::GenerateDumpFilePath(std::string* file_path) {
   UUID id = {0};
 
   UuidCreateType create_uuid = GetCreateUuid();

@@ -2,7 +2,6 @@
 #include "../UserDefineSingleton.h"
 #include "../../ioINILoader/ioINILoader.h"
 #include "ioConfiguration.h"
-#include <boost/lexical_cast.hpp>
 
 ioConfiguration::ioConfiguration(void) : m_allblock(FALSE), m_checkUserTimeout(2500), m_checkPingTime(1000*180), m_partitionTimer(1000*60*5), m_whiteListOn(FALSE)
 {
@@ -51,7 +50,7 @@ bool ioConfiguration::Init()
 		serverInfo.serverIndex = i+1;
 		strcpy_s(serverInfo.serverName, tokens[0].c_str());
 		strcpy_s(serverInfo.ipAddr, tokens[1].c_str());
-		serverInfo.port = boost::lexical_cast<int>(tokens[2]);
+		serverInfo.port = std::stoi(tokens[2]);
 
 		m_vServerAddr.push_back(serverInfo);
 	}
@@ -108,7 +107,7 @@ bool ioConfiguration::Init()
 			);
 		strcpy_s(m_IP,buffer);
 	}
-	catch(boost::bad_lexical_cast &e)
+	catch(std::exception &e)
 	{
 		LOG.PrintTimeAndLog(0,"ConfigFile Error[%s]",e.what());
 		return false;

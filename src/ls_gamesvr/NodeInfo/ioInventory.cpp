@@ -365,7 +365,7 @@ bool ioInventory::FindOtherSlotItem( IN ITEMSLOT &kSlot, OUT ITEMSLOT &rkSlot )
 	if( vItemCodeList.empty() )
 		return false;
 
-	std::random_shuffle( vItemCodeList.begin(), vItemCodeList.end() );
+	std::shuffle( vItemCodeList.begin(), vItemCodeList.end(), std::mt19937(std::random_device()()) );
 	rkSlot.m_item_type = kSlot.m_item_type;
 	rkSlot.m_item_code = vItemCodeList.front();
 	return true;

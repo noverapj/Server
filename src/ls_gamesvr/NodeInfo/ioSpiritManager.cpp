@@ -321,7 +321,7 @@ int ioSpiritManager::GetModeReward( ModeType eType )
 				IntVec kSpiritList;
 				if( GetSpiritTable( info.table_index, kSpiritList ) )
 				{
-					std::random_shuffle( kSpiritList.begin(), kSpiritList.end() );
+					std::shuffle( kSpiritList.begin(), kSpiritList.end(), std::mt19937(std::random_device()()) );
 					if( kSpiritList.empty() )
 					{
 						return -1;

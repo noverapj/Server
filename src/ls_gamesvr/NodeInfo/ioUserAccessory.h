@@ -48,7 +48,7 @@ public:
 	void SendAllAccessoryInfo();
 
 protected:
-	typedef boost::unordered_map<DWORD, Accessory> UserAccessoryItem;	//<인덱스, 해당아이템>
+	typedef std::unordered_map<DWORD, Accessory> UserAccessoryItem;	//<인덱스, 해당아이템>
 
 protected:
 	User* m_pUser;

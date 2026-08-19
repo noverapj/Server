@@ -204,7 +204,9 @@ public:
 	bool Read( Vector3 &arg );
 	bool Read( Quaternion &arg );
 
+#ifdef NPROTECT
 	bool Read(NProtectPacket& arg);
+#endif
 
 	void GetStringOfStream(std::string & str);
 	void GetStringOfStreamBody(std::string & str);

@@ -34,13 +34,13 @@ void ioLoginServerState::InitData()
 void ioLoginServerState::PrintTime()
 {
 	m_cpuTime.GetUsage(&m_sys,NULL);
-	float ftime = m_el.elapsed();
+	float ftime = std::chrono::duration<float>(std::chrono::steady_clock::now() - m_el).count();
 	ReportLOG.PrintTimeAndLog(0,"TestCount : %0.3f(%d)[%0.3f]",ftime,m_sys,(float)100000/ftime);
 	InterlockedExchange(&m_testCount,0);
-	m_el.restart();
+	m_el = std::chrono::steady_clock::now();
 }
 
 void ioLoginServerState::PrintLowTime()
 {
-	ReportLOG.PrintTimeAndLog(0,"Lowmemory time : %0.3f",m_startEl.elapsed());
+	ReportLOG.PrintTimeAndLog(0,"Lowmemory time : %0.3f", std::chrono::duration<float>(std::chrono::steady_clock::now() - m_startEl).count());
 }

@@ -777,8 +777,9 @@ void ioChannelingNodeDaum_v2::UTF8ToAnsi( IN const char *szUTF8, OUT char *szAns
 }
 
 //------------------------------------------------------------------------------------------------DAUM
-#include "openssl/sha.h"
-#include "openssl/hmac.h"
+#include <bcrypt.h>
+
+#define SHA256_DIGEST_LENGTH 32
 
 #pragma warning (disable : 4996)
 #pragma warning (disable : 4554)
@@ -808,7 +809,7 @@ char *ioChannelingNodeDaum_v2::pt(unsigned char *md, char* buf)
 {
 	int i;
 
-	for (i=0; i<EVP_MAX_MD_SIZE; i++)
+	for (i=0; i<SHA256_DIGEST_LENGTH; i++)
 		sprintf(&(buf[i*2]),"%02x",md[i]);
 	return(buf);
 }
@@ -817,11 +818,10 @@ char *ioChannelingNodeDaum_v2::getSig(char *apiKey, char* data, char* ts, char* 
 {
 	int orgLen = strlen(data) + strlen(ts) + strlen(nonce) + 1;
 	char *orgStr = (char*)malloc(orgLen);
-	char *digestStr = (char*)malloc(EVP_MAX_MD_SIZE + 1);
+	char *digestStr = (char*)malloc(SHA256_DIGEST_LENGTH*2 + 1);
 	char decodeApiKey[80];
-	char *md;
-	char tmp[EVP_MAX_MD_SIZE*2 + 1];
-	char c[80];
+	unsigned char md[SHA256_DIGEST_LENGTH];
+	char tmp[SHA256_DIGEST_LENGTH*2 + 1];
 
 	strncpy_s(orgStr,orgLen, data, strlen(data)+1);
 	strncat_s(orgStr,orgLen, ts, strlen(ts)+1);
@@ -829,13 +829,17 @@ char *ioChannelingNodeDaum_v2::getSig(char *apiKey, char* data, char* ts, char* 
 
 	decode((unsigned char*)apiKey, (unsigned char*)decodeApiKey);
 
-	md =(char*) HMAC(EVP_sha256(),
-		decodeApiKey, strlen(decodeApiKey),
-		(const unsigned char*)orgStr, strlen(orgStr),
-		(unsigned char*)c, NULL);
+	BCRYPT_ALG_HANDLE hAlg = NULL;
+	BCRYPT_HASH_HANDLE hHash = NULL;
+	BCryptOpenAlgorithmProvider(&hAlg, BCRYPT_SHA256_ALGORITHM, NULL, BCRYPT_ALG_HANDLE_HMAC_FLAG);
+	BCryptCreateHash(hAlg, &hHash, NULL, 0, (PUCHAR)decodeApiKey, (ULONG)strlen(decodeApiKey), 0);
+	BCryptHashData(hHash, (PUCHAR)orgStr, (ULONG)strlen(orgStr), 0);
+	BCryptFinishHash(hHash, md, sizeof(md), 0);
+	BCryptDestroyHash(hHash);
+	BCryptCloseAlgorithmProvider(hAlg, 0);
 
-	strncpy_s(digestStr,EVP_MAX_MD_SIZE + 1, pt((unsigned char *)md, tmp), EVP_MAX_MD_SIZE);
-	digestStr[EVP_MAX_MD_SIZE] = '\0';
+	strncpy_s(digestStr,SHA256_DIGEST_LENGTH*2 + 1, pt(md, tmp), SHA256_DIGEST_LENGTH*2);
+	digestStr[SHA256_DIGEST_LENGTH*2] = '\0';
 
 	free(orgStr);
 

@@ -1,8 +1,6 @@
 #pragma once
 
-
 #include "../iocpsocketdll\socketmodules\connectnode.h"
-#include <boost/timer.hpp>
 
 class ClientNode : public CConnectNode
 {

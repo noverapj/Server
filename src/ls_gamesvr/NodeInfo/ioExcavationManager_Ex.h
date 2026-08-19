@@ -25,7 +25,7 @@ struct EventGrade
 		m_iGradeBuffValue = 0;
 	}
 };
-typedef boost::unordered_map<int, EventGrade> EventGradeMap;
+typedef std::unordered_map<int, EventGrade> EventGradeMap;
 
 struct UserExcavationRewardInfo
 {
@@ -67,7 +67,7 @@ struct ExcavationEventGrade
 		m_iGradeBuffValue = 0;
 	}
 };
-typedef boost::unordered_map<int, ExcavationEventGrade> ExcavationEventGradeMap;
+typedef std::unordered_map<int, ExcavationEventGrade> ExcavationEventGradeMap;
 
 class ioExcavationManager_Ex
 {
@@ -167,9 +167,9 @@ protected:
 	typedef std::vector<ExcavationReward> REWARDINFO;
 	typedef std::vector<RewardGrade> REWARGRADEINFO;
 
-	typedef boost::unordered_map<int, COORDINATEINFO> MAPEXCAVATIONPOS;
-	typedef boost::unordered_map<int, REWARDINFO> MAPREWARDINFO;
-	typedef boost::unordered_map<int, int> MAPTOTALRAND;
+	typedef std::unordered_map<int, COORDINATEINFO> MAPEXCAVATIONPOS;
+	typedef std::unordered_map<int, REWARDINFO> MAPREWARDINFO;
+	typedef std::unordered_map<int, int> MAPTOTALRAND;
 
 	typedef std::map<int, int> CRITICALINFO;	//<È®·ü, ¹è¼ö>
 

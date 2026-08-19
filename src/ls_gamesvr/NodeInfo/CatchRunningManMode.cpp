@@ -26,7 +26,7 @@ void CatchRunningManMode::LoadINIValue()
 	m_RunningManDecoList.clear();
 	for(int i = 0;i < MAX_RUNNINGMAN_DECO;i++)
 		m_RunningManDecoList.push_back( i + 1 );
-	std::random_shuffle( m_RunningManDecoList.begin(), m_RunningManDecoList.end() );
+	std::shuffle( m_RunningManDecoList.begin(), m_RunningManDecoList.end(), std::mt19937(std::random_device()()) );
 }
 
 void CatchRunningManMode::DestroyMode()

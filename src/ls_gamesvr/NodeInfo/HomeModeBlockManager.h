@@ -1,6 +1,6 @@
 #pragma once
 
-#include <boost/unordered/unordered_map.hpp>
+#include <unordered_map>
 #include "ioBlockPropertyManager.h"
 
 class PersonalHomeInfo;
@@ -44,7 +44,7 @@ public:
 	DWORD GetPersonalHQIndex(const DWORD dwUserIndex);
 
 protected:
-	typedef boost::unordered_map<DWORD, PersonalHomeInfo*> HOMEBLOCKINFO;	// <userIndex, >
+	typedef std::unordered_map<DWORD, PersonalHomeInfo*> HOMEBLOCKINFO;	// <userIndex, >
 	typedef std::vector<BlockDefaultInfo> DEFAULTCONSTRUCTINFO;
 
 protected:

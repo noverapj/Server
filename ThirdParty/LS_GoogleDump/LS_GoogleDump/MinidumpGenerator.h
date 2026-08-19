@@ -5,6 +5,7 @@
 #include <dbghelp.h>
 #include <rpc.h>
 #include <list>
+#include <string>
 #include "MinidumpFormat.h"
 
 namespace google_breakpad {

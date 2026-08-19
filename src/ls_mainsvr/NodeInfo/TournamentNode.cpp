@@ -1202,7 +1202,7 @@ void TournamentNode::_TeamAllocateRandomCreate( DWORDVec &rkTeamList )
 
 	if( !rkTeamList.empty() )
 	{
-		std::random_shuffle( rkTeamList.begin(), rkTeamList.end() );
+		std::shuffle( rkTeamList.begin(), rkTeamList.end(), std::mt19937(std::random_device()()) );
 	}
 }
 
@@ -2082,7 +2082,7 @@ bool TournamentNode::CreateNewTournamentRoundCustom()
 	// 랜덤 배정 및 1라운드 세팅
 	if( m_TournamentTeamList.size() > 1 )
 	{
-		std::random_shuffle( m_TournamentTeamList.begin(), m_TournamentTeamList.end() );
+		std::shuffle( m_TournamentTeamList.begin(), m_TournamentTeamList.end(), std::mt19937(std::random_device()()) );
 	}
 
 	SHORT Position = 1;

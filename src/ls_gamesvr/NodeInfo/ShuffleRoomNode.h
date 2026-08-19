@@ -85,7 +85,7 @@ typedef struct tagShuffleRoomUser
 typedef vector< ShuffleRoomUser > vShuffleRoomUser;
 typedef vShuffleRoomUser::iterator vShuffleRoomUser_iter;
 
-class ShuffleRoomUserSort : public std::binary_function< const ShuffleRoomUser&, const ShuffleRoomUser&, bool >
+class ShuffleRoomUserSort
 {
 public:
 	bool operator()( const ShuffleRoomUser &lhs , const ShuffleRoomUser &rhs ) const

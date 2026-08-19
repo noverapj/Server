@@ -12,8 +12,10 @@
 #include "../NodeInfo/MemInfoManager.h"
 #include "../xml/ioxmldocument.h"
 #include "../xml/ioxmlelement.h"
-#include <openssl/sha.h>
+#include <bcrypt.h>
 #include <atltime.h>
+
+#define SHA256_DIGEST_LENGTH 32
 
 extern CLog LOG;
 
@@ -149,11 +151,19 @@ void ioLocalBrazil::GetHashString( const ioHashString& szMemberUID, int iBilling
 void ioLocalBrazil::MakeHashCode(  const char *rszCode, OUT char *szHashCode )
 {
 	unsigned char digest[SHA256_DIGEST_LENGTH];
-	
-	SHA256_CTX ctx;
-	SHA256_Init(&ctx);
-	SHA256_Update(&ctx, rszCode, strlen(rszCode));
-	SHA256_Final(digest, &ctx);
+
+	BCRYPT_ALG_HANDLE hAlg = NULL;
+	BCRYPT_HASH_HANDLE hHash = NULL;
+	if (BCryptOpenAlgorithmProvider(&hAlg, BCRYPT_SHA256_ALGORITHM, NULL, 0) == 0)
+	{
+		if (BCryptCreateHash(hAlg, &hHash, NULL, 0, NULL, 0, 0) == 0)
+		{
+			BCryptHashData(hHash, (PUCHAR)rszCode, (ULONG)strlen(rszCode), 0);
+			BCryptFinishHash(hHash, digest, sizeof(digest), 0);
+			BCryptDestroyHash(hHash);
+		}
+		BCryptCloseAlgorithmProvider(hAlg, 0);
+	}
 
 	for (int i = 0; i < SHA256_DIGEST_LENGTH; i++)
 		sprintf(&szHashCode[i*2], "%02x", (unsigned int)digest[i]);

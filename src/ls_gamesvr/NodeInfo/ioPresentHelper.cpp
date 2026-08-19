@@ -2928,7 +2928,7 @@ bool ioPresentHelper::SendRandPresentBySelectGashapon( User* pUser, DWORD dwEtcI
 		return false;
 	}
 
-	std::random_shuffle( vPresentList.begin(), vPresentList.end() );
+	std::shuffle( vPresentList.begin(), vPresentList.end(), std::mt19937(std::random_device()()) );
 
 	int iRandSize = MAX_GASHAPON_SELECT_SLOT - (int)vSelect.size();
 #ifdef GASHAPON_PRESENT_LIMITED_QUANTITY_BY_BCKIM			// 2020-03-26 by bckim, 가차 선택 제한			
@@ -3210,7 +3210,7 @@ bool ioPresentHelper::SendRandPresentByRisingGashapon( User* pUser, DWORD dwEtcI
 
 		}
 
-		std::random_shuffle( vRandPresent.begin(), vRandPresent.end() );
+		std::shuffle( vRandPresent.begin(), vRandPresent.end(), std::mt19937(std::random_device()()) );
 
 
 		DWORD dwTotalRand = 0;

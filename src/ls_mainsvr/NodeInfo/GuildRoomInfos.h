@@ -1,6 +1,6 @@
 # pragma once
 
-#include <boost/unordered/unordered_map.hpp>
+#include <unordered_map>
 
 class GuildRoomInfos : public Singleton< GuildRoomInfos >
 {
@@ -35,7 +35,7 @@ public:
 	static GuildRoomInfos& GetSingleton();
 
 protected:
-	typedef boost::unordered_map<DWORD,DWORD> GUILDROOMINFOS;
+	typedef std::unordered_map<DWORD,DWORD> GUILDROOMINFOS;
 
 protected:
 	GUILDROOMINFOS m_mGuildRoomInfos;

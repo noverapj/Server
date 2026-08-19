@@ -218,7 +218,7 @@ struct TeamChange
 
 typedef std::vector< TeamChange > TeamChangeList;
 
-class TeamChangeSort : public std::binary_function< const TeamChange&, const TeamChange&, bool >
+class TeamChangeSort
 {
 public:
 	bool operator()( const TeamChange &lhs, const TeamChange &rhs ) const
@@ -232,7 +232,7 @@ public:
 
 typedef std::vector< RankInfo > RankList;
 
-class KillDeathLevelSort : public std::binary_function< const KillDeathRankInfo&, const KillDeathRankInfo&, bool >
+class KillDeathLevelSort
 {
 public:
 	bool operator()( const KillDeathRankInfo &lhs , const KillDeathRankInfo &rhs ) const
@@ -253,7 +253,7 @@ public:
 };
 
 // Score > Kill > DeathMin
-class RankInfoSort : public std::binary_function< const RankInfo&, const RankInfo&, bool >
+class RankInfoSort
 {
 public:
 	bool operator()( const RankInfo &lhs , const RankInfo &rhs ) const
@@ -280,7 +280,7 @@ public:
 	}
 };
 
-class FinalRankInfoSort : public std::binary_function< const RankInfo&, const RankInfo&, bool >
+class FinalRankInfoSort
 {
 public:
 	bool operator()( const RankInfo &lhs , const RankInfo &rhs ) const
@@ -475,7 +475,7 @@ struct SupplyItemTime
 		m_ShufflePosList.clear();
 		m_ShufflePosList.insert( m_ShufflePosList.begin(), m_PosList.begin(), m_PosList.end() );
 
-		std::random_shuffle( m_ShufflePosList.begin(), m_ShufflePosList.end() );
+		std::shuffle( m_ShufflePosList.begin(), m_ShufflePosList.end(), std::mt19937(std::random_device()()) );
 
 		vPos = m_ShufflePosList.front();
 		m_ShufflePosList.pop_front();
@@ -489,7 +489,7 @@ typedef std::vector< SupplyItemTime > SupplyItemTimeList;
 //
 typedef std::list< PlayingTimeInfo > PlayingTimeList;
 
-class PlayingTimeListSort : public std::binary_function< const PlayingTimeInfo&, const PlayingTimeInfo&, bool >
+class PlayingTimeListSort
 {
 public:
 	bool operator()(  const PlayingTimeInfo &lhs, const PlayingTimeInfo &rhs ) const
@@ -501,7 +501,7 @@ public:
 	}
 };
 
-class ClassPlayTimeSort : public std::binary_function< const ClassPlayTimeInfo&, const ClassPlayTimeInfo&, bool >
+class ClassPlayTimeSort
 {
 public:
 	bool operator()(  const ClassPlayTimeInfo &lhs, const ClassPlayTimeInfo &rhs ) const
@@ -531,7 +531,7 @@ struct NextTeamInfo
 
 typedef std::vector< NextTeamInfo > NextTeamInfoList;
 
-class NextTeamInfoSort : public std::binary_function< const NextTeamInfo&, const NextTeamInfo&, bool >
+class NextTeamInfoSort
 {
 public:
 	bool operator()( const NextTeamInfo &lhs , const NextTeamInfo &rhs ) const

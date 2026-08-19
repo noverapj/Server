@@ -81,8 +81,8 @@ enum eDATA
 	DATA_TABLE_MAX,
 };
 typedef std::basic_string<TCHAR> tstring;
-typedef boost::unordered_map<tstring, int> DataEumMap;
-typedef boost::unordered_map<tstring, tstring> DataSheetMap;
+typedef std::unordered_map<tstring, int> DataEumMap;
+typedef std::unordered_map<tstring, tstring> DataSheetMap;
 
 class ioTableDataMgr
 {

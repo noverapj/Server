@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Util/Singleton.h"
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 class ioPowerUpManager : public Singleton< ioPowerUpManager > 
 {
@@ -12,7 +12,7 @@ protected:
 		DWORD dwItemCode;
 
 		int	iMaxPowerUpGrade;
-		boost::unordered_map<int, std::vector<int>> mPowerUpItemCodeInfo; //<장착부위, 랭크에따른 코드>
+		std::unordered_map<int, std::vector<int>> mPowerUpItemCodeInfo; //<장착부위, 랭크에따른 코드>
 		
 		PowerUpCharInfo()
 		{
@@ -33,10 +33,10 @@ public:
 
 protected:
 	typedef std::vector<int> vItemGradeCodeInfo;
-	typedef boost::unordered_map<int, vItemGradeCodeInfo> mPowerUpItemCode;
-	typedef boost::unordered_map<int, int> mNeedMaterialCnt;
-	typedef boost::unordered_map<int, PowerUpCharInfo> mPowerUpCharInfo;
-	typedef boost::unordered_map<int, IntVec> mPowerUpRareItemInfo;  // <기본code, 단계별 코드>
+	typedef std::unordered_map<int, vItemGradeCodeInfo> mPowerUpItemCode;
+	typedef std::unordered_map<int, int> mNeedMaterialCnt;
+	typedef std::unordered_map<int, PowerUpCharInfo> mPowerUpCharInfo;
+	typedef std::unordered_map<int, IntVec> mPowerUpRareItemInfo;  // <기본code, 단계별 코드>
 
 public:
 	void LoadINI();
