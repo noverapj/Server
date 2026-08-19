@@ -267,7 +267,7 @@ void TrainingMode::SetStartPosArray()
 		m_PlazaTeamPosArray.push_back(i);
 	}
 
-	std::random_shuffle( m_PlazaTeamPosArray.begin(), m_PlazaTeamPosArray.end() );
+	std::shuffle( m_PlazaTeamPosArray.begin(), m_PlazaTeamPosArray.end(), std::mt19937(std::random_device()()) );
 
 	m_iBluePosArray = m_PlazaTeamPosArray[0];
 	m_iRedPosArray  = m_PlazaTeamPosArray[1];
@@ -1248,8 +1248,8 @@ Vector3 TrainingMode::GetRandomItemPos(ioItem *pItem)
 								  m_vItemCreatePosList.begin(),
 								  m_vItemCreatePosList.end() );
 
-	std::random_shuffle( m_vItemShufflePosList.begin(),
-						 m_vItemShufflePosList.end() );
+	std::shuffle( m_vItemShufflePosList.begin(),
+						 m_vItemShufflePosList.end(), std::mt19937(std::random_device()()) );
 
 	vPos = m_vItemShufflePosList.front();
 	m_vItemShufflePosList.pop_front();

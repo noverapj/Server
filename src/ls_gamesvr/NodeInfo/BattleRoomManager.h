@@ -39,7 +39,7 @@ typedef struct tagSortBattleRoom
 }SortBattleRoom;
 typedef vector< SortBattleRoom > vSortBattleRoom;
 typedef vSortBattleRoom::iterator vSortBattleRoom_iter;
-class BattleRoomSort : public std::binary_function< const SortBattleRoom&, const SortBattleRoom&, bool >
+class BattleRoomSort
 {
 public:
 	bool operator()( const SortBattleRoom &lhs , const SortBattleRoom &rhs ) const

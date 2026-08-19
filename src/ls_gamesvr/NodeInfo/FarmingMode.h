@@ -79,7 +79,7 @@ protected:
 protected:
 	typedef std::vector<CoordinateInfo> COORDINATEINFO;
 
-	typedef boost::unordered_map<int, COORDINATEINFO> MAPSUPPLYITEMPOS;
+	typedef std::unordered_map<int, COORDINATEINFO> MAPSUPPLYITEMPOS;
 	typedef std::map<int, int> CRITICALINFO;				//<È®·ü, ¹è¼ö>
 	IORandom	m_ioRand;
 

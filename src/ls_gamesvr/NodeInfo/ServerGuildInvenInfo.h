@@ -1,6 +1,6 @@
 #pragma once
 
-typedef boost::unordered_map<DWORD, int> GUILDINVENINFO;	// <아이템코드, 수량>
+typedef std::unordered_map<DWORD, int> GUILDINVENINFO;	// <아이템코드, 수량>
 
 struct GuildInvenInfo
 {
@@ -43,7 +43,7 @@ public:
 	BOOL IsPrevData(const DWORD dwGuildIndex, const __int64 i64Ver);
 
 protected:
-	typedef boost::unordered_map<DWORD, GuildInvenInfo> SERVERGUILDINVENINFO;
+	typedef std::unordered_map<DWORD, GuildInvenInfo> SERVERGUILDINVENINFO;
 
 protected:
 	SERVERGUILDINVENINFO m_mServerGuildInvenInfo;

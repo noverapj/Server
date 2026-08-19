@@ -1266,7 +1266,7 @@ void ioItemCompoundManager::CheckTestMultiCompound( bool bEqual, bool bRateTest,
 	RandomItemList vTestList = rkInfo.m_vRandomItemList;
 	if( !vTestList.empty() )
 	{
-		std::random_shuffle( vTestList.begin(), vTestList.end() );
+		std::shuffle( vTestList.begin(), vTestList.end(), std::mt19937(std::random_device()()) );
 	}
 
 	IORandom kTestRandom;

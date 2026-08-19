@@ -27,7 +27,7 @@ typedef struct tagSortRoom
 }SortRoom;
 typedef vector< SortRoom > vSortRoom;
 typedef vSortRoom::iterator vSortRoom_iter;
-class RoomInfoSort : public std::binary_function< const SortRoom&, const SortRoom&, bool >
+class RoomInfoSort
 {
 public:
 	bool operator()( const SortRoom &lhs , const SortRoom &rhs ) const
@@ -70,7 +70,7 @@ typedef struct tagSortPlazaRoom
 }SortPlazaRoom;
 typedef vector< SortPlazaRoom > vSortPlazaRoom;
 typedef vSortPlazaRoom::iterator vSortPlazaRoom_iter;
-class PlazaRoomSort : public std::binary_function< const SortPlazaRoom&, const SortPlazaRoom&, bool >
+class PlazaRoomSort
 {
 public:
 	bool operator()( const SortPlazaRoom &lhs , const SortPlazaRoom &rhs ) const
@@ -81,7 +81,7 @@ public:
 	}
 };
 
-class DamageTableSort : public std::binary_function< const DamageTable&, const DamageTable&, bool >
+class DamageTableSort
 {
 public:
 	bool operator()( const DamageTable &lhs , const DamageTable &rhs ) const

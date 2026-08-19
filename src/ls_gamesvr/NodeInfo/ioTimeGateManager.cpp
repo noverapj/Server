@@ -297,7 +297,7 @@ int ioTimeGateManager::GetSameRandomReward( int iRand, TimeGateInfo& rewardInfo 
 		}
 	}
 
-	std::random_shuffle( vTempReward.begin(), vTempReward.end() );
+	std::shuffle( vTempReward.begin(), vTempReward.end(), std::mt19937(std::random_device()()) );
 	if( !vTempReward.empty() )
 	{
 		rewardInfo = vTempReward[0];

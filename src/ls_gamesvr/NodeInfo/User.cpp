@@ -41785,8 +41785,8 @@ void User::OnPracticeEnter( SP2Packet &rkPacket )
 		return;
 	}
 
-	boost::posix_time::time_duration diff = boost::posix_time::microsec_clock::local_time() -  pPractice->GetBoostPracticeEndTime();
-	int ms = diff.total_milliseconds();
+	auto diff = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() -  pPractice->GetBoostPracticeEndTime());
+	int ms = (int)diff.count();
 	if(abs(ms) < HackCheck::CheckTime( HackCheck::HT_MACRO ))
 	{	
 		int iAbusing = pPractice->GetAbusingCount() + 1;

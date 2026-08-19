@@ -1,5 +1,5 @@
 -- NOVERAOSS-Server premake5
--- Toolset: VS2010 (v100). CRT: mixed (server apps static /MT, DLLs dynamic /MD).
+-- Toolset: VS2022 (v143). CRT: mixed (server apps static /MT, DLLs dynamic /MD).
 
 local function Vpaths(projDir)
     vpaths {
@@ -13,10 +13,12 @@ end
 workspace "Server"
     configurations { "Debug", "Release" }
     platforms { "Win32" }
-    toolset "v100"
+    toolset "v143"
     location "build"
     characterset "MBCS"
     multiprocessorcompile "On"
+    buildoptions { "/std:c++17" }
+    defines { "_HAS_STD_BYTE=0" }
 
     filter "configurations:Debug"
         defines { "_DEBUG" }
@@ -208,29 +210,21 @@ local function ls_app(name, dir, opts)
 end
 
 group "Servers"
--- ls_loginsvr (boost 1.50, PCH)
+-- ls_loginsvr (PCH)
 ls_app("ls_loginsvr", "src/ls_loginsvr", function()
     pchheader "stdafx.h"; pchsource "src/ls_loginsvr/stdafx.cpp"
-    buildoptions { "/Zm200" }
-    includedirs { "ThirdParty/boost/1_50_0" }
-    libdirs { "lib/boost/1_50_0" }
 end)
 
--- ls_relaysvr (boost 1.50 headers, PCH)
+-- ls_relaysvr (PCH)
 ls_app("ls_relaysvr", "src/ls_relaysvr", function()
     pchheader "stdafx.h"; pchsource "src/ls_relaysvr/stdafx.cpp"
-    buildoptions { "/Zm200" }
     removefiles { "src/ls_relaysvr/LSGameServerConnector/ServerInfoManager.cpp" }
-    includedirs { "ThirdParty/boost/1_50_0" }
-    libdirs { "lib/boost/1_50_0" }
 end)
 
 -- ls_mainsvr (boost 1.50, no PCH)
 ls_app("ls_mainsvr", "src/ls_mainsvr", function()
     files { "src/ls_mainsvr/**.c" }
     removefiles { "src/ls_mainsvr/INILoader/ioDataChunk.cpp", "src/ls_mainsvr/INILoader/ioINILoader.cpp", "src/ls_mainsvr/INILoader/ioINIParser.cpp", "src/ls_mainsvr/INILoader/ioStream.cpp", "src/ls_mainsvr/Util/Utility.cpp" }
-    includedirs { "ThirdParty/boost/1_50_0" }
-    libdirs { "lib/boost/1_50_0" }
     defines { "__OHTG_PRACTICE_MERGE_WORK__" }
 end)
 
@@ -242,29 +236,27 @@ ls_app("ls_gamesvr", "src/ls_gamesvr", function()
         "src/ls_gamesvr/Local/ioLocalEU.cpp", "src/ls_gamesvr/Local/ioLocalLatin.cpp", "src/ls_gamesvr/Local/ioLocalSingapore.cpp",
         "src/ls_gamesvr/NodeInfo/BattleRoomReserveMgr.cpp", "src/ls_gamesvr/NodeInfo/GuildInven.cpp",
     }
-    buildoptions { "/Zm200" }
-    ignoredefaultlibraries { "LIBC" }
-    includedirs { "ThirdParty/boost/1_50_0", "ThirdParty/NMCrypt", "ThirdParty/nProtect", "ThirdParty/Xtrap", "ThirdParty/XignCode", "ThirdParty/HackShield", "ThirdParty/CrashFind" }
-    libdirs { "lib/boost/1_50_0", "lib/nProtect" }
+    includedirs { "ThirdParty/NMCrypt", "ThirdParty/nProtect", "ThirdParty/Xtrap", "ThirdParty/XignCode", "ThirdParty/HackShield", "ThirdParty/CrashFind" }
+    libdirs { "lib/nProtect" }
     links { "NMCrypt", "wininet" }
+    ignoredefaultlibraries { "LIBC.lib" }
     defines { "__OHTG_BILLING_VALOFE_ADD__", "__OHTG_PRACTICE_MERGE_WORK__" }
     filter { "files:src/ls_gamesvr/Xtrap/XTrap4Server.cpp" }
         buildoptions { "/Y-" }
-    filter "configurations:Debug"
-        ignoredefaultlibraries { "msvcrt" }
     filter "configurations:Release"
-        defines { "NPROTECT", "NPROTECT_CSAUTH3", "EXCAVATION_EX_BYBCKIM", "__OHTG_PCBANG_EVENT_CASH__" }
+        defines { "__OHTG_PCBANG_EVENT_CASH__" }
+        linkoptions { "/SAFESEH:NO" }
     filter {}
 end)
 
 -- ls_billingsvr (OpenSSL, no boost, no PCH, #import needs /MP off)
 ls_app("ls_billingsvr", "src/ls_billingsvr", function()
     multiprocessorcompile "Off"
-    files { "src/ls_billingsvr/Util/cJSON.c" }
+    files { "src/ls_billingsvr/Util/cJSON.c", "src/ls_billingsvr/crt_compat.cpp" }
     removefiles { "src/ls_billingsvr/BillingRelayServer.cpp", "src/ls_billingsvr/Channeling/ioChannelingNodeNexonSession.cpp", "src/ls_billingsvr/Local/ioLocalSA.cpp" }
     includedirs { "ThirdParty/OpenSSL", "ThirdParty/LS_HTTP", "ThirdParty/LS_NXSoap", "ThirdParty/LS_RestAPI", "ThirdParty/LS_GoogleDump", "ThirdParty/GAuthClientDLL" }
     libdirs { "lib/OpenSSL" }
-    links { "LS_GoogleDump", "tinyxml", "LS_HTTP", "LS_NXSoap", "LS_RestAPI" }
+    links { "LS_GoogleDump", "tinyxml", "LS_HTTP", "LS_NXSoap", "LS_RestAPI", "legacy_stdio_definitions" }
     filter "configurations:Debug"
         links { "GAuthClientDLL", "libcurld" }
     filter "configurations:Release"

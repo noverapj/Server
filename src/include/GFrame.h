@@ -22,7 +22,7 @@
 #include <list>
 #include <string>
 #include <map>
-#include <hash_map>
+#include <unordered_map>
 #include <dbghelp.h>
 #include <tchar.h>
 #include <sql.h>

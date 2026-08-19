@@ -6818,7 +6818,7 @@ void DBClient::OnDBServerTest()
 	if( (int)vIndexList.size() < GetNodeSize() )
 		return;
 
-	std::random_shuffle( vIndexList.begin(), vIndexList.end() );
+	std::shuffle( vIndexList.begin(), vIndexList.end(), std::mt19937(std::random_device()()) );
 	int iDBASendCnt = ( (int)vIndexList.size() ) / GetNodeSize();
 	for(i = 0;i < GetNodeSize();i++)
 	{

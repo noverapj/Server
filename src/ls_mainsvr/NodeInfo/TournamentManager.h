@@ -5,7 +5,7 @@
 
 class ServerNode;
 typedef std::vector< TournamentNode * > TournamentVec;
-class TournamentSort : public std::binary_function< const TournamentNode*, const TournamentNode*, bool >
+class TournamentSort
 {
 public:
 	bool operator()( const TournamentNode *lhs , const TournamentNode *rhs ) const

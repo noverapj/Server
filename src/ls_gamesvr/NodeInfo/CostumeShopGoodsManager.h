@@ -77,7 +77,7 @@ public:
 	static CostumeShopGoodsManager& GetSingleton();
 
 protected:
-	typedef boost::unordered_map<int, CostumeGoodsInfo> GoodsList;		//<惑前内靛, class>
+	typedef std::unordered_map<int, CostumeGoodsInfo> GoodsList;		//<惑前内靛, class>
 
 protected:
 	GoodsList m_mCostumeGoodsMap;

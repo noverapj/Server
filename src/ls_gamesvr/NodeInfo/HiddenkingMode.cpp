@@ -1036,8 +1036,8 @@ Vector3 HiddenkingMode::GetRandomItemPos(ioItem *pItem)
 								  m_vItemCreatePosList.begin(),
 								  m_vItemCreatePosList.end() );
 
-	std::random_shuffle( m_vItemShufflePosList.begin(),
-						 m_vItemShufflePosList.end() );
+	std::shuffle( m_vItemShufflePosList.begin(),
+						 m_vItemShufflePosList.end(), std::mt19937(std::random_device()()) );
 
 	vPos = m_vItemShufflePosList.front();
 	m_vItemShufflePosList.pop_front();

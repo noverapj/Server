@@ -14,7 +14,7 @@ public:
 	LOG_* GetQueue();
 
 protected:
-	boost::locking_queue<LOG_*> m_queue;
+	locking_queue<LOG_*> m_queue;
 	TCHAR szPrevTime[MAX_PATH];
 };
 

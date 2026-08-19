@@ -184,7 +184,7 @@ public:
 	~ioCharacter();
 };
 
-class CharInfoSort : public std::binary_function< const ioCharacter *, const ioCharacter *, bool >
+class CharInfoSort
 {
 public:
 	bool operator()( const ioCharacter *lhs , const ioCharacter *rhs ) const

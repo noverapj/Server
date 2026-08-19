@@ -193,7 +193,7 @@ void ioBingo::InitBingoNumber()
 	
 	 // shuffle
 	if( g_BingoMgr.GetBingoType() == BT_RAND )	
-		random_shuffle( tempBingo.begin(), tempBingo.end() );
+		std::shuffle( tempBingo.begin(), tempBingo.end(), std::mt19937(std::random_device()()) );
 	
 	// Declare
 	int iArrayIdx = 0;
@@ -335,7 +335,7 @@ int ioBingo::FreeChoiceNumber()
 	}
 
 	// random_shuffle
-	random_shuffle( tempNumber.begin(), tempNumber.end() );
+	std::shuffle( tempNumber.begin(), tempNumber.end(), std::mt19937(std::random_device()()) );
 
 	// choice
 	int selectNumber = tempNumber[ 0 ];
@@ -390,7 +390,7 @@ bool ioBingo::RandomShuffleNumber()
 	}
 
 	// random_shuffle
-	random_shuffle( vecNoneBingo.begin(), vecNoneBingo.end() );
+	std::shuffle( vecNoneBingo.begin(), vecNoneBingo.end(), std::mt19937(std::random_device()()) );
 
 	int iArrayIdx = 0;
 	for( int i = 0 ; i < MAX ; ++i )

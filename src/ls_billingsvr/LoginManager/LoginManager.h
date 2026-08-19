@@ -38,7 +38,7 @@ public:
 	virtual ~LoginInfo(void){}
 };
 
-class LoginInfoCompare : public binary_function< const LoginInfo*, const LoginInfo*, bool > // setºñ±³ class
+class LoginInfoCompare
 {
 public:
 	bool operator()(const LoginInfo *lhs , const LoginInfo *rhs) const

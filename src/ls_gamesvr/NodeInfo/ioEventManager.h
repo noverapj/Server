@@ -3,7 +3,7 @@
 
 #include "../Util/Singleton.h"
 #include "ModeDefine.h"
-#include <boost/unordered/unordered_map.hpp>
+#include <unordered_map>
 
 // server가 가지고 있는 event
 enum EventType
@@ -333,8 +333,8 @@ protected:
 	typedef std::vector<int> ALLOWEDITEMTYPE;
 	typedef std::vector<DWORD> ITEMCODE;
 
-	//typedef boost::unordered_map<int, ITEMCODE> EXCEPTIONITEM;		// <type, 
-	typedef boost::unordered_map<int, ITEMCODE> EVENTITEM;		// <type, 
+	//typedef std::unordered_map<int, ITEMCODE> EXCEPTIONITEM;		// <type, 
+	typedef std::unordered_map<int, ITEMCODE> EVENTITEM;		// <type, 
 
 	EVENTITEM		m_mExceptionItemInfo;		//해당 이벤트 기능이 제외된 아이템 정보.
 	EVENTITEM		m_mAllowedItemInfo;
@@ -362,8 +362,8 @@ protected:
 	typedef std::vector<int> ALLOWEDITEMTYPE;
 	typedef std::vector<DWORD> ITEMCODE;
 
-	//typedef boost::unordered_map<int, ITEMCODE> EXCEPTIONITEM;		// <type, 
-	typedef boost::unordered_map<int, ITEMCODE> EVENTITEM;		// <type, 
+	//typedef std::unordered_map<int, ITEMCODE> EXCEPTIONITEM;		// <type, 
+	typedef std::unordered_map<int, ITEMCODE> EVENTITEM;		// <type, 
 
 	EVENTITEM		m_mExceptionItemInfo;		//해당 이벤트 기능이 제외된 아이템 정보.
 	EVENTITEM		m_mAllowedItemInfo;
@@ -411,7 +411,7 @@ protected:
 	typedef std::vector<int> ALLOWEDITEMTYPE;
 
 	typedef std::vector<ITEMDATA> vITEMDATA;
-	typedef boost::unordered_map<int, vITEMDATA> SALEEVENTITEM;		// <type, 
+	typedef std::unordered_map<int, vITEMDATA> SALEEVENTITEM;		// <type, 
 
 	SALEEVENTITEM	m_mCumulativeSaleItemInfo;
 	DWORD			m_dwNextResetTime;

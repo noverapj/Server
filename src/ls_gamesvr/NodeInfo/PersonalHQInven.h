@@ -28,7 +28,7 @@ public:
 	int GetItemCount(const DWORD dwItemCode);
 
 protected:
-	typedef boost::unordered_map<DWORD, int> INVENINFO;	//<코드, 아이템수>
+	typedef std::unordered_map<DWORD, int> INVENINFO;	//<코드, 아이템수>
 
 protected:
 	User* m_pUser;

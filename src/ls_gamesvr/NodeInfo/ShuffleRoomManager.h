@@ -24,7 +24,7 @@ typedef struct tagSortShuffleRoom
 typedef vector< SortShuffleRoom > vSortShuffleRoom;
 typedef vSortShuffleRoom::iterator vSortShuffleRoom_iter;
 
-class ShuffleRoomSort : public std::binary_function< const SortShuffleRoom&, const SortShuffleRoom&, bool >
+class ShuffleRoomSort
 {
 public:
 	bool operator()( const SortShuffleRoom &lhs , const SortShuffleRoom &rhs ) const

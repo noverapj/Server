@@ -378,7 +378,7 @@ void PracticeMode::OnPractice_GameStart( User *pUser, SP2Packet &rkPacket )
 		return;
 	}
 
-	boost::posix_time::ptime t = boost::posix_time::microsec_clock::local_time();
+	auto t = std::chrono::system_clock::now();
 
 	SetPracticeIndex( iPracticeIndex );
 	SetBoostPracticeStartTime(t);
@@ -475,9 +475,9 @@ void PracticeMode::OnPracticeResult( User *pUser, SP2Packet &rkPacket )
 		bUpdate = true;
 	}
 
-	pUserPractice->SetBoostPracticeEndTime(boost::posix_time::microsec_clock::local_time());
-	boost::posix_time::time_duration diff = boost::posix_time::microsec_clock::local_time() -  GetBoostPracticeStartTime();
-	int ms = diff.total_milliseconds();
+	pUserPractice->SetBoostPracticeEndTime(std::chrono::system_clock::now());
+	auto diff = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now() -  GetBoostPracticeStartTime());
+	int ms = (int)diff.count();
 
 	if( ms < 0 )
 	{

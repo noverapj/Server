@@ -78,7 +78,7 @@ typedef struct tagLadderTeamUser
 }LadderTeamUser;
 typedef vector< LadderTeamUser > vLadderTeamUser;
 typedef vLadderTeamUser::iterator vLadderTeamUser_iter;
-class LadderTeamUserSort : public std::binary_function< const LadderTeamUser&, const LadderTeamUser&, bool >
+class LadderTeamUserSort
 {
 public:
 	bool operator()( const LadderTeamUser &lhs , const LadderTeamUser &rhs ) const

@@ -17,21 +17,15 @@
 #include "Manager.h"
 #include "../include/Log.h"
 #include "Version.h"
-/************************************************************************/
-/* Boost                                                                     */
-/************************************************************************/
-#include <boost/thread.hpp>
-#include <boost/asio.hpp>
-#include <boost/asio/deadline_timer.hpp>
-#include <boost/timer.hpp>
-#include <boost/chrono.hpp>
-#include <boost/pool/pool_alloc.hpp>
-#include <boost/pool/singleton_pool.hpp>
-#include <boost/thread/once.hpp>
+
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+#include <chrono>
+#include <filesystem>
+#include <memory>
+
 #include "BaseClass/locking_queue.h"
-#include <boost/date_time/microsec_time_clock.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
-#include <boost/filesystem.hpp>
 /************************************************************************/
 /* UserLib                                                                     */
 /************************************************************************/
@@ -110,18 +104,17 @@ public:
 	}
 	void Start()
 	{
-		tStart = boost::chrono::system_clock::now();
+		tStart = std::chrono::system_clock::now();
 	}
 	unsigned int End()
 	{
-		 
-		tEnd = boost::chrono::system_clock::now();
-		boost::chrono::milliseconds mill = boost::chrono::duration_cast<boost::chrono::milliseconds>(tEnd - tStart);
-		return mill.count();
+		tEnd = std::chrono::system_clock::now();
+		auto mill = std::chrono::duration_cast<std::chrono::milliseconds>(tEnd - tStart);
+		return (unsigned int)mill.count();
 	}
 protected:
-	boost::chrono::system_clock::time_point tStart;
-	boost::chrono::system_clock::time_point tEnd;
+	std::chrono::system_clock::time_point tStart;
+	std::chrono::system_clock::time_point tEnd;
 
 };
 

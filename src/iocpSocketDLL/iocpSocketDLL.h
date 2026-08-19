@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <windows.h>
 #include <winsock2.h>
+#include <string>
 
 #pragma comment(lib, "ws2_32.lib")
 

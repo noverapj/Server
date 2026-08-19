@@ -1,5 +1,6 @@
 #pragma once
 
+#include <chrono>
 
 #include "Mode.h"
 #include "../BoostPooler.h"
@@ -13,7 +14,7 @@ protected:
 	std::vector< ModeRecord > m_vRecordList;
 
 	int m_iPracticeIndex;
-	boost::posix_time::ptime m_PracticeStartTime;
+	std::chrono::system_clock::time_point m_PracticeStartTime;
 
 public:
 	virtual void InitMode();
@@ -59,8 +60,8 @@ public:
 	void SetPracticeIndex( int iIndex ) { m_iPracticeIndex = iIndex; }
 	int GetPracticeIndex()	{	return m_iPracticeIndex;		}
 
-	void SetBoostPracticeStartTime( boost::posix_time::ptime PracticeStartTime ){	m_PracticeStartTime = PracticeStartTime;	}
-	boost::posix_time::ptime GetBoostPracticeStartTime(){	return m_PracticeStartTime;	}
+	void SetBoostPracticeStartTime( std::chrono::system_clock::time_point PracticeStartTime ){	m_PracticeStartTime = PracticeStartTime;	}
+	std::chrono::system_clock::time_point GetBoostPracticeStartTime(){	return m_PracticeStartTime;	}
 
 protected:
 	int SetRegularSoldierItem( int iSlot, OUT int &iItemCode );

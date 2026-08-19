@@ -21,7 +21,7 @@ struct stRewardData
 	}
 };
 
-struct stRewardDataSort : public std::binary_function< const stRewardData&, const stRewardData&, bool >
+struct stRewardDataSort
 {
 public:
 	bool operator()( const stRewardData& lhs, const stRewardData& rhs ) const

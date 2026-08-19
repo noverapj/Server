@@ -241,7 +241,7 @@ void MonsterSurvivalMode::LoadMapINIValue()
 			sprintf_s( szKey, "turn%d_idx", iLowTurn + 1 );
 			vTurnList.push_back( rkLoader.LoadInt( szKey, 0 ) );
 		}
-		std::random_shuffle( vTurnList.begin(), vTurnList.end() );      //LowTurnµéÀ» ¼¯´Â´Ù.
+		std::shuffle( vTurnList.begin(), vTurnList.end(), std::mt19937(std::random_device()()) );      //LowTurnµéÀ» ¼¯´Â´Ù.
 
 		iMaxLowTurn = min( (int)vTurnList.size(), rkLoader.LoadInt( "max_play_turn", iMaxLowTurn ) );
 		for(iLowTurn = 0;iLowTurn < iMaxLowTurn;iLowTurn++)
@@ -2523,7 +2523,7 @@ void MonsterSurvivalMode::OnMonsterDieToItemDrop( float fDropX, float fDorpZ, Mo
 
 	Vector3Vec vRandPos;
 	OnMonsterDropItemPos( vRandPos, 150.0f );
-	std::random_shuffle( vRandPos.begin(), vRandPos.end() );
+	std::shuffle( vRandPos.begin(), vRandPos.end(), std::mt19937(std::random_device()()) );
 	//
 
 	int i = 0;
@@ -2585,7 +2585,7 @@ void MonsterSurvivalMode::OnMonsterDieToRewardItemDrop( float fDropX, float fDro
 	OnMonsterDropItemPos( vRandPos, 100.0f );
 	OnMonsterDropItemPos( vRandPos, 150.0f );
 	OnMonsterDropItemPos( vRandPos, 200.0f );
-	std::random_shuffle( vRandPos.begin(), vRandPos.end() );
+	std::shuffle( vRandPos.begin(), vRandPos.end(), std::mt19937(std::random_device()()) );
 	
 	//
 	int i = 0;

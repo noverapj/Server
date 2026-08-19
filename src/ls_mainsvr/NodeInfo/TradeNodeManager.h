@@ -11,7 +11,7 @@ typedef std::map<DWORD, TradeNode*> mapTradeNode;
 
 enum { MAX_SYNC_ITEM = 200, };
 
-class TradeSort : public std::binary_function< const TradeNode*, const TradeNode*, bool >
+class TradeSort
 {
 public:
 	bool operator()( const TradeNode *lhs , const TradeNode *rhs ) const

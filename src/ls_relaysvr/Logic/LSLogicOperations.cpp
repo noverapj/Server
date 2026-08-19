@@ -1,7 +1,5 @@
 #include "StdAfx.h"
 #include "LSLogicOperations.h"
-#include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
 
  int TestOperation::Run(void * arg)
  {
@@ -94,13 +92,20 @@
 
  int OnAccept::MakePortIndex(const GameServerNode* node) // »ç¿ë X
  {
-#if 0 
+#if 0
 	 int udpPortSize = g_UDPNode()->GetUDP_port()->size();
 	 std::string serverIpAddr = node->ServerAddress();
 	 typedef vector< std::string > split_vector_type;
 	 split_vector_type splitIpAddrs;
-	 boost::split(splitIpAddrs,serverIpAddr,boost::is_any_of("."),boost::token_compress_on);
-	 int tmpPortNum = boost::lexical_cast<int>(splitIpAddrs[splitIpAddrs.size()-1]);
+	 std::string delim = ".";
+	 // simple split
+	 size_t pos = 0;
+	 while ((pos = serverIpAddr.find(delim)) != std::string::npos) {
+		 splitIpAddrs.push_back(serverIpAddr.substr(0, pos));
+		 serverIpAddr.erase(0, pos + delim.length());
+	 }
+	 splitIpAddrs.push_back(serverIpAddr);
+	 int tmpPortNum = std::stoi(splitIpAddrs[splitIpAddrs.size()-1]);
 	 tmpPortNum += node->ServerPort() +1;
 	 Debug("GmaerServer Port: %d RelayServer Port : %d\n ",node->ServerPort(),tmpPortNum % udpPortSize);
 	 int resultValue = tmpPortNum % udpPortSize;

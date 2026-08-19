@@ -391,7 +391,7 @@ namespace nsGSS
 	/// 자식 노드의 구분은 비트값으로 이루어진다.
 	//////////////////////////////////////////////////////////////////////////////
 	// 
-	class CMatchWordNode : public stdext::hash_map<size_t, CMatchWordNode*>
+	class CMatchWordNode : public std::unordered_map<size_t, CMatchWordNode*>
 	{
 
 	private:
@@ -3052,8 +3052,8 @@ namespace nsGSS
 
 	private:
 		bool m_bLoad;
-		stdext::hash_map<int, IP_ADDRESS_STRING> m_hmAdapList;
-		stdext::hash_map<int, string> m_hmMacAddrList;
+		std::unordered_map<int, IP_ADDRESS_STRING> m_hmAdapList;
+		std::unordered_map<int, string> m_hmMacAddrList;
 		std::list<MIB_IPFORWARDROW> m_liRoutingInfo;	
 
 		// Private과 Public을 구분하기 위해서 HOST로 쓸수없는 IP영역을 저장한다..

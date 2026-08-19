@@ -1,7 +1,6 @@
 #pragma once
 
-
-#include <boost/thread/mutex.hpp>
+#include <chrono>
 #include "CPU.h"
 
 class ioLoginServerState
@@ -52,11 +51,11 @@ public:
 	{
 		if(m_testCount == 0)
 		{
-			if(m_timestate == false)
+		if(m_timestate == false)
 
-				m_startEl.restart();
-			InterlockedIncrement(&m_testCount);
-			m_el.restart();
+			m_startEl = std::chrono::steady_clock::now();
+		InterlockedIncrement(&m_testCount);
+		m_el = std::chrono::steady_clock::now();
 			m_timestate = true;
 			return;
 		}
@@ -92,9 +91,8 @@ protected:
 	int m_dllAcceptCount;
 	int m_dllAcceptTime;
 	long m_testCount;
-	boost::timer m_el;
-	boost::timer m_startEl;
-	boost::mutex m_lock;
+	std::chrono::steady_clock::time_point m_el;
+	std::chrono::steady_clock::time_point m_startEl;
 	int m_sys;
 	CPU m_cpuTime;
 	bool m_timestate;

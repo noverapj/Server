@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Manager.h"
 #include "UserDefineSingleton.h"
+#include <iostream>
 
 extern void ShutDown();
 

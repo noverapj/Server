@@ -1,6 +1,5 @@
 #include "../stdafx.h"
 #include "PracticeNode.h"
-#include "boost/range/algorithm/partial_sort.hpp"
 #include "../DataBase/DBClient.h"
 
 extern CLog OperatorLOG;

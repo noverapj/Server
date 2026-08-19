@@ -25,7 +25,7 @@ public:
 	void PutConnectData(int opid,SVRCONNECTINFO_& addr,GameServerNode* node = NULL);
 
 protected:
-	boost::locking_queue<Connect_*> m_queue;
+	locking_queue<Connect_*> m_queue;
 	MemPooler<GameServerNode>    m_memPool;
 };
 

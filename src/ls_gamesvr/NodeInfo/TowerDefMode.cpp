@@ -2074,7 +2074,7 @@ void CTowerDefMode::TreasureCardStop()
 	kPacket << iRemainCount;
 
 	if( !m_vTreasureCard.empty() )
-		std::random_shuffle( m_vTreasureCard.begin(), m_vTreasureCard.end() );
+		std::shuffle( m_vTreasureCard.begin(), m_vTreasureCard.end(), std::mt19937(std::random_device()()) );
 
 	int iRecordCnt = m_vRecordList.size();
 	for(int i = 0;i < iRecordCnt;i++)

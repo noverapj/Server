@@ -55,7 +55,7 @@ void HouseMode::SetStartPosArray()
 		m_TeamPosArray.push_back(i);
 	}
 
-	std::random_shuffle( m_TeamPosArray.begin(), m_TeamPosArray.end() );
+	std::shuffle( m_TeamPosArray.begin(), m_TeamPosArray.end(), std::mt19937(std::random_device()()) );
 
 	m_iBluePosArray = m_TeamPosArray[0];
 	m_iRedPosArray  = m_TeamPosArray[1];

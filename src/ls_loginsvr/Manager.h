@@ -1,7 +1,5 @@
 #pragma once
 
-#include <boost/any.hpp>
-
 class Manager
 {
 public:

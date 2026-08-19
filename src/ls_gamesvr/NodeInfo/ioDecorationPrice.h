@@ -151,7 +151,7 @@ public:
 	virtual ~ioDecorationPrice();
 
 protected:
-	typedef boost::unordered_map<int, SpecialDefaultDecoInfo> SPECIALDEFAULTINFO; // <classType, 치장 정보들>
+	typedef std::unordered_map<int, SpecialDefaultDecoInfo> SPECIALDEFAULTINFO; // <classType, 치장 정보들>
 	typedef SPECIALDEFAULTINFO::iterator	SPECIALDEFAULTINFO_iter;
 
 protected:

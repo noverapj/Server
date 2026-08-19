@@ -97,8 +97,7 @@ BOOL ServiceLS::ServiceStart()
 	{
 		Debug(_T("service start - success\r\n"));
 
-		boost::asio::io_service::work work(*S_IO::instance());
-		S_IO::instance()->run();
+		S_IO::instance()->wait();
 		ShutDown();
 		return TRUE;
 	}

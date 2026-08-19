@@ -3312,7 +3312,7 @@ void UserNodeManager::OnResultSelectItemBuyCnt(CQueryResultData *query_data)
 		return;
 	}
 
-	static boost::unordered_map<int, int> mClassPrice;
+	static std::unordered_map<int, int> mClassPrice;
 	mClassPrice.clear();
 
 	/*int iClassSetPeso[ioItemPriceManager::DB_LOAD_COUNT];

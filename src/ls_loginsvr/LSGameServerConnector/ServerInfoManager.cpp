@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ServerInfoManager.h"
+#include <algorithm>
 
 
 ServerInfoManager::ServerInfoManager(void)

@@ -657,7 +657,7 @@ bool ioMonsterMapLoadMgr::GetTurnData( DWORD dwIndex, TurnData &rkTurnData, int 
 	{
 		vRandomCode.resize( rMonsterTable.m_MonsterRandomCode.size() );
 		std::copy( rMonsterTable.m_MonsterRandomCode.begin(), rMonsterTable.m_MonsterRandomCode.end(), vRandomCode.begin() );
-		std::random_shuffle( vRandomCode.begin(), vRandomCode.end() ); 
+		std::shuffle( vRandomCode.begin(), vRandomCode.end(), std::mt19937(std::random_device()()) ); 
 	}
 	
 	// 일반 몬스터 로드

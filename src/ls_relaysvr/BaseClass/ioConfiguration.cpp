@@ -1,8 +1,6 @@
 #include "StdAfx.h"
 #include "../UserDefineSingleton.h"
 #include "ioConfiguration.h"
-#include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
 
 #define ini_load_lib
 
@@ -14,9 +12,6 @@
 	#else if RELEASE
 	#pragma comment( lib, "../lib/INI.lib" )
 	#endif
-#else
-	#include <boost/property_tree/ptree.hpp>
-	#include <boost/property_tree/ini_parser.hpp>
 #endif
 
 
@@ -67,7 +62,7 @@ bool ioConfiguration::Init()
 		/************************************************************************/
 		ClientInfoLoad(kLoader);
 	}
-	catch(boost::bad_lexical_cast &e)
+	catch(std::exception &e)
 	{
 		LOG.PrintTimeAndLog(0,"ConfigFile Error[%s]",e.what());
 		return false;
@@ -85,7 +80,7 @@ void ioConfiguration::AcceptorInfoLoad( const char* szINI )
 	Tokenize(strTmpPorts,portTokens,",");
 	for(UINT i = 0; i< portTokens.size(); ++i)
 	{
-		int udpPort = boost::lexical_cast<int>(portTokens[i]);
+		int udpPort = std::stoi(portTokens[i]);
 		m_udpPorts.push_back(udpPort);
 	}
 
@@ -111,14 +106,19 @@ void ioConfiguration::AcceptorInfoLoad( const char* szINI )
 		std::vector<std::string> tokens;
 		Tokenize(szValue, tokens, ",");
 		for(UINT j=0; j< tokens.size(); ++j)
-			boost::algorithm::trim(tokens[j]);
+		{
+			std::string trimmed = tokens[j];
+			trimmed.erase(0, trimmed.find_first_not_of(" \t\r\n"));
+			trimmed.erase(trimmed.find_last_not_of(" \t\r\n") + 1);
+			tokens[j] = trimmed;
+		}
 		if(tokens.size() != 3) break;
 
 		SVRCONNECTINFO_ serverInfo;
 		serverInfo.serverIndex = i;
 		strcpy_s(serverInfo.serverName, tokens[0].c_str());
 		strcpy_s(serverInfo.ipAddr, tokens[1].c_str());
-		serverInfo.port = boost::lexical_cast<int>(tokens[2]);
+		serverInfo.port = std::stoi(tokens[2]);
 
 		m_serverAddrs.push_back(serverInfo);
 	}

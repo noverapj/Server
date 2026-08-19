@@ -20,7 +20,7 @@ typedef struct tagSortServerNode
 typedef vector< SortServerNode > vSortServerNode;
 typedef vSortServerNode::iterator vSortServerNode_iter;
 
-class ServerNodeSort : public std::binary_function< const SortServerNode&, const SortServerNode&, bool >
+class ServerNodeSort
 {
 public:
 	bool operator()( const SortServerNode &lhs , const SortServerNode &rhs ) const
@@ -47,7 +47,7 @@ typedef struct tagToolServerInfo
 	}
 }ToolServerInfo;
 
-class ToolServerInfoCompare : public binary_function< const ToolServerInfo*, const ToolServerInfo*, bool > // setºñ±³ class
+class ToolServerInfoCompare
 {
 public:
 	bool operator()(const ToolServerInfo *lhs , const ToolServerInfo *rhs) const

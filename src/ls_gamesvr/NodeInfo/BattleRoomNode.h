@@ -122,7 +122,7 @@ typedef vBMRoomUser::iterator vBMRoomUser_iter;
 // End. 2019-02-14 by bckim, 배틀 모드 추가
 
 
-class BattleRoomUserSort : public std::binary_function< const BattleRoomUser&, const BattleRoomUser&, bool >
+class BattleRoomUserSort
 {
 public:
 	bool operator()( const BattleRoomUser &lhs , const BattleRoomUser &rhs ) const

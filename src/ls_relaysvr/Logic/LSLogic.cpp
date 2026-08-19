@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "LSLogic.h"
-#include <boost/date_time/posix_time/posix_time_duration.hpp>
+#include <filesystem>
 
 
 LSLogic::LSLogic(void)
@@ -16,7 +16,7 @@ LSLogic::LSLogic(void)
 	SetCurrentDirectory(temp);
 	std::string strtemp = temp;
 	strtemp = strtemp + g_Config()->GetLogFolder();
-	boost::filesystem::create_directory(strtemp);
+	std::filesystem::create_directory(strtemp);
 }
 
 LSLogic::~LSLogic(void)

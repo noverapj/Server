@@ -7,7 +7,7 @@ using namespace std;
 class ServerNode;
 typedef vector< GuildNode * > vGuildNode;
 typedef vGuildNode::iterator vGuildNode_iter;
-class GuildSort : public std::binary_function< const GuildNode*, const GuildNode*, bool >
+class GuildSort
 {
 public:
 	bool operator()( const GuildNode *lhs , const GuildNode *rhs ) const

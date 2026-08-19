@@ -17,7 +17,7 @@ public:
 	BOOL DeleteItem(const DWORD dwItemIndex);
 
 protected:
-	typedef boost::unordered_map<DWORD, DWORD> ITEMINFOS;	// <index, code>
+	typedef std::unordered_map<DWORD, DWORD> ITEMINFOS;	// <index, code>
 
 protected:
 	ITEMINFOS m_mGuildInvenInfos;

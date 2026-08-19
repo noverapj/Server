@@ -191,7 +191,7 @@ protected:
 		}
 	};
 
-	class GashaponPresentSort : public std::binary_function< const GashaponPresent&, const GashaponPresent&, bool >
+	class GashaponPresentSort
 	{
 	public:
 		bool operator()( const GashaponPresent &lhs , const GashaponPresent &rhs ) const

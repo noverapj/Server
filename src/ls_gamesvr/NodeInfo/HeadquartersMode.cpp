@@ -170,7 +170,7 @@ void HeadquartersMode::SetStartPosArray()
 		m_TeamPosArray.push_back(i);
 	}
 
-	std::random_shuffle( m_TeamPosArray.begin(), m_TeamPosArray.end() );
+	std::shuffle( m_TeamPosArray.begin(), m_TeamPosArray.end(), std::mt19937(std::random_device()()) );
 
 	m_iBluePosArray = m_TeamPosArray[0];
 	m_iRedPosArray  = m_TeamPosArray[1];
@@ -758,7 +758,7 @@ void HeadquartersMode::ProcessRevival()
 			{
 				// NPC 코드
 				if( m_MonsterTable.m_MonsterCodeList.size() > 1 )
-					std::random_shuffle( m_MonsterTable.m_MonsterCodeList.begin(), m_MonsterTable.m_MonsterCodeList.end() ); 
+					std::shuffle( m_MonsterTable.m_MonsterCodeList.begin(), m_MonsterTable.m_MonsterCodeList.end(), std::mt19937(std::random_device()()) ); 
 
 				rkCharacter.dwCode = *m_MonsterTable.m_MonsterCodeList.begin();
 
@@ -982,7 +982,7 @@ void HeadquartersMode::CheckCharacterCreate( bool bForceCreate )
 
 					// NPC 코드
 					if( m_MonsterTable.m_MonsterCodeList.size() > 1 )
-						std::random_shuffle( m_MonsterTable.m_MonsterCodeList.begin(), m_MonsterTable.m_MonsterCodeList.end() ); 
+						std::shuffle( m_MonsterTable.m_MonsterCodeList.begin(), m_MonsterTable.m_MonsterCodeList.end(), std::mt19937(std::random_device()()) ); 
 
 					kCharacter.dwCode = *m_MonsterTable.m_MonsterCodeList.begin();
 
@@ -1607,8 +1607,8 @@ Vector3 HeadquartersMode::GetRandomItemPos(ioItem *pItem)
 								  m_vItemCreatePosList.begin(),
 								  m_vItemCreatePosList.end() );
 
-	std::random_shuffle( m_vItemShufflePosList.begin(),
-						 m_vItemShufflePosList.end() );
+	std::shuffle( m_vItemShufflePosList.begin(),
+						 m_vItemShufflePosList.end(), std::mt19937(std::random_device()()) );
 
 	vPos = m_vItemShufflePosList.front();
 	m_vItemShufflePosList.pop_front();
@@ -1654,7 +1654,7 @@ void HeadquartersMode::OnMonsterDieToItemDrop( float fDropX, float fDorpZ, const
 
 	Vector3Vec vRandPos;
 	OnMonsterDropItemPos( vRandPos, 150.0f );
-	std::random_shuffle( vRandPos.begin(), vRandPos.end() );
+	std::shuffle( vRandPos.begin(), vRandPos.end(), std::mt19937(std::random_device()()) );
 	//
 
 	ITEM_DATA kItem;
