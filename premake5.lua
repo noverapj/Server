@@ -191,6 +191,7 @@ local function ls_app(name, dir, opts)
     location "build"
     targetdir "../build/zone_novera/server/%{cfg.buildcfg}/%{prj.name}"
     objdir "build/obj/%{cfg.buildcfg}/%{prj.name}"
+    symbolspath '$(OutDir)../pdb/$(TargetName).pdb'
     staticruntime "On"
     characterset "MBCS"
     multiprocessorcompile "On"
