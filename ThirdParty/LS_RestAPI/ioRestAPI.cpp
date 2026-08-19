@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "ioRestAPI.h"
-#include "libcurl/curl.h"
+#include <curl/curl.h>
 #include <vector>
 
 #define STR_MAX 4096

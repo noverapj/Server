@@ -132,9 +132,7 @@ project "LS_NXSoap"
     objdir "build/obj/%{cfg.buildcfg}/%{prj.name}"
     staticruntime "On"
     characterset "MBCS"
-    defines { "WITH_OPENSSL" }
     files { "ThirdParty/LS_NXSoap/LS_NXSoap/**.h", "ThirdParty/LS_NXSoap/LS_NXSoap/**.cpp" }
-    includedirs { "ThirdParty/LS_NXSoap/openssl" }
     filter "configurations:Debug" runtime "Debug"; targetname "LS_NXSoapD"
     filter "configurations:Release" runtime "Release"; targetname "LS_NXSoap"
     filter {}
@@ -178,7 +176,8 @@ project "LS_RestAPI"
     characterset "MBCS"
     pchheader "stdafx.h"; pchsource "ThirdParty/LS_RestAPI/stdafx.cpp"
     files { "ThirdParty/LS_RestAPI/**.h", "ThirdParty/LS_RestAPI/**.cpp" }
-    includedirs { "ThirdParty/LS_RestAPI" }
+    includedirs { "ThirdParty/LS_RestAPI", "ThirdParty/libcurl/include" }
+    defines { "CURL_STATICLIB" }
     filter "configurations:Debug" runtime "Debug"; targetname "LS_RestAPID"
     filter "configurations:Release" runtime "Release"; targetname "LS_RestAPI"
     filter {}
@@ -255,9 +254,9 @@ ls_app("ls_billingsvr", "src/ls_billingsvr", function()
     multiprocessorcompile "Off"
     files { "src/ls_billingsvr/Util/cJSON.c", "src/ls_billingsvr/crt_compat.cpp" }
     removefiles { "src/ls_billingsvr/BillingRelayServer.cpp", "src/ls_billingsvr/Channeling/ioChannelingNodeNexonSession.cpp", "src/ls_billingsvr/Local/ioLocalSA.cpp" }
-    includedirs { "ThirdParty/OpenSSL", "ThirdParty/LS_HTTP", "ThirdParty/LS_NXSoap", "ThirdParty/LS_RestAPI", "ThirdParty/LS_GoogleDump", "ThirdParty/GAuthClientDLL" }
-    libdirs { "lib/OpenSSL" }
-    links { "LS_GoogleDump", "tinyxml", "LS_HTTP", "LS_NXSoap", "LS_RestAPI", "legacy_stdio_definitions" }
+    includedirs { "ThirdParty/LS_HTTP", "ThirdParty/LS_NXSoap", "ThirdParty/LS_RestAPI", "ThirdParty/LS_GoogleDump", "ThirdParty/GAuthClientDLL", "ThirdParty/libcurl/include" }
+    libdirs { "lib/curl" }
+    links { "LS_GoogleDump", "tinyxml", "LS_HTTP", "LS_NXSoap", "LS_RestAPI", "secur32", "crypt32", "advapi32", "bcrypt", "normaliz", "iphlpapi", "wldap32" }
     filter "configurations:Debug"
         links { "GAuthClientDLL", "libcurld" }
     filter "configurations:Release"
