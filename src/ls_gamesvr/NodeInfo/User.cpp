@@ -1027,6 +1027,9 @@ void User::FillMoveData( SP2Packet &rkPacket )
 	// 성장 정보
 	m_UserGrowthLevel.FillMoveData( rkPacket );
 
+	// 개성 정보
+	m_UserIndividuality.FillMoveData( rkPacket );
+
 	// 선물함 정보
 	m_UserPresent.FillMoveData( rkPacket );
 
@@ -1461,6 +1464,9 @@ void User::ApplyMoveData( SP2Packet &rkPacket, bool bDummyNode )
 	
 	// 성장 정보
 	m_UserGrowthLevel.ApplyMoveData( rkPacket, bDummyNode );
+
+	// 개성 정보
+	m_UserIndividuality.ApplyMoveData( rkPacket, bDummyNode );
 
 	// 선물함 정보
 	m_UserPresent.ApplyMoveData( rkPacket, bDummyNode );
@@ -4209,6 +4215,11 @@ ioUserRecord* User::GetUserRecord()
 ioUserGrowthLevel* User::GetUserGrowthLevel()
 {
 	return &m_UserGrowthLevel;
+}
+
+ioUserIndividuality* User::GetUserIndividuality()
+{
+	return &m_UserIndividuality;
 }
 
 ioUserFishingItem* User::GetUserFishingItem()

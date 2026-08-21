@@ -19,6 +19,7 @@ class ioPresentHelper;
 class ioMyLevelMgr;
 class ioMonsterMapLoadMgr;
 class GrowthManager;
+class IndividualityManager;
 class FishingManager;
 class NewPublicIDRefresher;
 class ioChannelingNodeManager;
@@ -144,6 +145,7 @@ private:
 	ioAlchemicMgr			   *m_pAlchemicMgr;
 
 	GrowthManager			   *m_pGrowthMgr;
+	IndividualityManager	   *m_pIndividualityMgr;
 	FishingManager			   *m_pFishingMgr;
 	NewPublicIDRefresher       *m_pNewPublicIDRefresher;
 	ioChannelingNodeManager    *m_pChannelingMgr;

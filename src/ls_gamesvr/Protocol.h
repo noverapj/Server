@@ -510,6 +510,8 @@ enum ClientSendTCPPacketType
 
 #define CTPK_CHANGE_CHAR_CHECK				0x0500
 
+#define CTPK_INDIVIDIUALITY_REQUEST				0x0551
+
 #define CTPK_ABSTRACT						0x0fff
 
 //ITPK Internal Protocol
@@ -1353,6 +1355,10 @@ enum BattleModeCommandResult
 // 2020-06-05 by bckim, 하드시리얼 유저 제재
 #define STPK_DISCONNECT_HDD_SERIAL_BLOCK		0x2679
 // End. 2020-06-05 by bckim, 하드시리얼 유저 제재
+
+#define STPK_USER_INDIVIDUALITY_DATA			0x2690
+#define STPK_INDIVIDUALITY_CHANGE				0x2691
+#define STPK_INDIVIDUALITY_APPLY				0x2692
 
 
 enum FlagModeResult

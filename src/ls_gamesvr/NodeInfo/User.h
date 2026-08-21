@@ -23,6 +23,7 @@
 #include "ioUserGuild.h"
 #include "ioUserRecord.h"
 #include "ioUserGrowthLevel.h"
+#include "ioUserIndividuality.h"
 #include "ChannelParent.h"
 #include "../HackCheck.h"
 #include "ioEventUserManager.h"
@@ -311,6 +312,7 @@ private:
 	ioUserPresent			m_UserPresent;
 	ioUserSubscription		m_UserSubscription;
 	ioUserGrowthLevel		m_UserGrowthLevel;
+	ioUserIndividuality		m_UserIndividuality;
 	ioUserFishingItem		m_UserFishingItem;
 	ioUserExtraItem			m_UserExtraItem;
 	ioUserMedalItem			m_UserMedalItem;
@@ -741,6 +743,7 @@ public:
 
 	ioUserSubscription*    GetUserSubscription();	
 	ioUserGrowthLevel*     GetUserGrowthLevel();
+	ioUserIndividuality*   GetUserIndividuality();
 	ioUserFishingItem*     GetUserFishingItem();
 	ioUserExtraItem*       GetUserExtraItem();
 	ioUserMedalItem*       GetUserMedalItem();

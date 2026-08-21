@@ -429,6 +429,12 @@
 
 #define DBAGENT_DISCONNECT_HDD_SERIAL_CHECK_GET			0x0344	// 2020-06-05 by bckim, 하드시리얼 유저 제재
 
+// 개성
+#define DBAGENT_INDIVIDUALITY_DATA_SET				0x0345
+#define DBAGENT_INDIVIDUALITY_DATA_NEW_INDEX			0x0346
+#define DBAGENT_INDIVIDUALITY_DATA_GET				0x0347
+#define DBAGENT_INDIVIDUALITY_DATA_UPD				0x0348
+
 enum
 {
 	DBAGENT_PRACTICE_LIST_GET = 0x7000,
@@ -645,6 +651,12 @@ public:
 	void OnInsertGrowth( const DWORD dwAgentID, const DWORD dwThreadID, const ioHashString &szUserGUID, const ioHashString &szID, DWORD dwUserIdx, cSerialize& v_FT );
 	void OnSelectGrowthIndex( const DWORD dwAgentID, const DWORD dwThreadID, const ioHashString &szUserGUID, const ioHashString &szID, DWORD dwUserIdx );
 	void OnUpdateGrowth( const DWORD dwAgentID, const DWORD dwThreadID, int user_index, DWORD dwClassInfoIdx, cSerialize& v_FT );
+
+public:
+	void OnLoginSelectAllIndividuality( const DWORD dwAgentID, const DWORD dwThreadID, const ioHashString &szUserGUID, const ioHashString &szID, DWORD dwUserIdx );
+	void OnInsertIndividuality( const DWORD dwAgentID, const DWORD dwThreadID, const ioHashString &szUserGUID, const ioHashString &szID, DWORD dwUserIdx, cSerialize& v_FT );
+	void OnSelectIndividualityIndex( const DWORD dwAgentID, const DWORD dwThreadID, const ioHashString &szUserGUID, const ioHashString &szID, DWORD dwUserIdx );
+	void OnUpdateIndividuality( const DWORD dwAgentID, const DWORD dwThreadID, int user_index, DWORD dwIdx, cSerialize& v_FT );
 
 public:
 	void OnInsertFishData( const DWORD dwAgentID, const DWORD dwThreadID, const ioHashString &szUserGUID, const ioHashString &szID, DWORD dwUserIdx, cSerialize& v_FT );

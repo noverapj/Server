@@ -335,6 +335,11 @@ public:       //DB RESULT
 	void OnResultSelectGrowthIndex(CQueryResultData *query_data);
 	void OnResultUpdateGrowth(CQueryResultData *query_data);
 
+	void OnResultLoginSelectAllIndividuality(CQueryResultData *query_data);
+	void OnResultInsertIndividuality(CQueryResultData *query_data);
+	void OnResultSelectIndividualityIndex(CQueryResultData *query_data);
+	void OnResultUpdateIndividuality(CQueryResultData *query_data);
+
 	void OnResultInsertFishData(CQueryResultData *query_data);
 	void OnResultSelectFishDataIndex(CQueryResultData *query_data);
 	void OnResultSelectAllFishData(CQueryResultData *query_data);
