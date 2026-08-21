@@ -21,6 +21,7 @@
 #include "NodeInfo/ioPresentHelper.h"
 #include "NodeInfo/ioMyLevelMgr.h"
 #include "NodeInfo/GrowthManager.h"
+#include "NodeInfo/IndividualityManager.h"
 #include "NodeInfo/FishingManager.h"
 #include "NodeInfo/NewPublicIDRefresher.h"
 #include "NodeInfo/ioExtraItemInfoManager.h"
@@ -450,6 +451,10 @@ BOOL ioMainProcess::LoadINI()
 	m_pGrowthMgr = new GrowthManager;
 	if( m_pGrowthMgr )
 		m_pGrowthMgr->LoadGrowthInfo();
+
+	m_pIndividualityMgr = new IndividualityManager;
+	if( m_pIndividualityMgr )
+		m_pIndividualityMgr->LoadINI();
 
 	m_pFishingMgr = new FishingManager;
 	if( m_pFishingMgr )
