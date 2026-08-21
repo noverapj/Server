@@ -2416,6 +2416,18 @@ bool UserNodeManager::GlobalQueryParse(SP2Packet &packet)
 	case DBAGENT_GROWTH_DATA_UPD:
 		OnResultUpdateGrowth(&query_data);
 		return true;
+	case DBAGENT_INDIVIDUALITY_DATA_GET:
+		OnResultLoginSelectAllIndividuality(&query_data);
+		return true;
+	case DBAGENT_INDIVIDUALITY_DATA_SET:
+		OnResultInsertIndividuality(&query_data);
+		return true;
+	case DBAGENT_INDIVIDUALITY_DATA_NEW_INDEX:
+		OnResultSelectIndividualityIndex(&query_data);
+		return true;
+	case DBAGENT_INDIVIDUALITY_DATA_UPD:
+		OnResultUpdateIndividuality(&query_data);
+		return true;
 	case DBAGENT_FISH_DATA_SET:
 		OnResultInsertFishData(&query_data);		
 		return true;
@@ -4131,6 +4143,9 @@ void UserNodeManager::OnResultLoginSelectAllQuestData(CQueryResultData *query_da
 	//유저의 용병 성장정보를 가져온다. 소유한 슬롯 이후에 가져올것
 	g_DBClient.OnLoginSelectAllGrowth( pUser->GetUserDBAgentID(), pUser->GetAgentThreadID(), pUser->GetGUID(), pUser->GetPublicID(), pUser->GetUserIndex() );
 
+	//유저의 개성 정보를 가져온다.
+	g_DBClient.OnLoginSelectAllIndividuality( pUser->GetUserDBAgentID(), pUser->GetAgentThreadID(), pUser->GetGUID(), pUser->GetPublicID(), pUser->GetUserIndex() );
+
 	// 유저의 확장 메달슬롯 정보를 가져온다.
 	g_DBClient.OnLoginSelectAllExMedalSlotData( pUser->GetUserDBAgentID(), pUser->GetAgentThreadID(), pUser->GetGUID(), pUser->GetPublicID(), pUser->GetUserIndex() );
 
@@ -5523,6 +5538,82 @@ void UserNodeManager::OnResultUpdateGrowth(CQueryResultData *query_data)
 	if(FAILED(query_data->GetResultType()))
 	{
 		LOG.PrintTimeAndLog( LOG_DEBUG_LEVEL,"DB OnResultUpdateGrowth Result FAILED! :%d",query_data->GetResultType());
+		return;
+	}
+}
+
+void UserNodeManager::OnResultLoginSelectAllIndividuality(CQueryResultData *query_data)
+{
+	if(FAILED(query_data->GetResultType()))
+	{
+		LOG.PrintTimeAndLog( LOG_DEBUG_LEVEL,"DB OnResultLoginSelectAllIndividuality Result FAILED! :%d",query_data->GetResultType());
+		return;
+	}
+
+	int iUserIndex = 0;
+	PACKET_GUARD_VOID( query_data->GetValue(iUserIndex, sizeof(int)) );
+
+	User *pUser = GetUserNode(iUserIndex);
+	if( pUser == NULL )
+	{
+		LOG.PrintTimeAndLog( LOG_DEBUG_LEVEL,"DB OnResultLoginSelectAllIndividuality USER FIND NOT! :%d", iUserIndex);
+		return;
+	}
+	if( pUser->GetUserIndex() != (DWORD)iUserIndex )
+	{
+		LOG.PrintTimeAndLog( LOG_DEBUG_LEVEL,"DB OnResultLoginSelectAllIndividuality USER INDEX NOT! :%d - %d", pUser->GetUserIndex(), iUserIndex);
+		return;
+	}
+
+	ioUserIndividuality *pIndividuality = pUser->GetUserIndividuality();
+	if( pIndividuality )
+	{
+		pIndividuality->DBtoData( query_data );
+	}
+}
+
+void UserNodeManager::OnResultInsertIndividuality(CQueryResultData *query_data)
+{
+	if(FAILED(query_data->GetResultType()))
+	{
+		LOG.PrintTimeAndLog( LOG_DEBUG_LEVEL,"DB OnResultInsertIndividuality Result FAILED! :%d",query_data->GetResultType());
+		return;
+	}
+}
+
+void UserNodeManager::OnResultSelectIndividualityIndex(CQueryResultData *query_data)
+{
+	if(FAILED(query_data->GetResultType()))
+	{
+		LOG.PrintTimeAndLog( LOG_DEBUG_LEVEL,"DB OnResultSelectIndividualityIndex Result FAILED! :%d",query_data->GetResultType());
+		return;
+	}
+
+	DWORD dwUserIdx = 0;
+	DWORD dwIdx = 0;
+	query_data->GetValue( dwUserIdx, sizeof(int) );
+	query_data->GetValue( dwIdx, sizeof(int) );
+
+	User *pUser = GetUserNode(dwUserIdx);
+	if( pUser == NULL )
+	{
+		LOG.PrintTimeAndLog( LOG_DEBUG_LEVEL, "DB OnResultSelectIndividualityIndex USER FIND NOT! :%d", dwUserIdx);
+		return;
+	}
+
+	ioUserIndividuality *pIndividuality = pUser->GetUserIndividuality();
+	if( pIndividuality )
+	{
+		if( !pIndividuality->DBtoNewIndex( dwIdx ) )
+			LOG.PrintTimeAndLog( LOG_DEBUG_LEVEL, "OnResultSelectIndividualityIndex : (%d - %d) 새로운 인덱스를 넣을 수 없습니다.", dwUserIdx, dwIdx );
+	}
+}
+
+void UserNodeManager::OnResultUpdateIndividuality(CQueryResultData *query_data)
+{
+	if(FAILED(query_data->GetResultType()))
+	{
+		LOG.PrintTimeAndLog( LOG_DEBUG_LEVEL,"DB OnResultUpdateIndividuality Result FAILED! :%d",query_data->GetResultType());
 		return;
 	}
 }

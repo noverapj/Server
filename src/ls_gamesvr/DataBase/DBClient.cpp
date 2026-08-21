@@ -2933,6 +2933,124 @@ void DBClient::OnUpdateGrowth( const DWORD dwAgentID, const DWORD dwThreadID, in
 	}
 }
 
+void DBClient::OnLoginSelectAllIndividuality( const DWORD dwAgentID, const DWORD dwThreadID, const ioHashString &szUserGUID, const ioHashString &szID, DWORD dwUserIdx )
+{
+	const int queryId = 2210;
+
+	cSerialize v_FT;
+	vVALUETYPE v_VT;
+
+	v_FT.Write( dwUserIdx );
+	v_VT.push_back( GetValueType( vLONG, sizeof(LONG) ) );					// idx
+	v_VT.push_back( GetValueType( vLONG, sizeof(LONG) ) );					// ClassType
+	for( int i = 0; i < MAX_BASIC_TRAIT; ++i )
+		v_VT.push_back( GetValueType( vLONG, sizeof(LONG) ) );				// BasicTrait1-8
+	for( int i = 0; i < MAX_CORE_TRAIT; ++i )
+		v_VT.push_back( GetValueType( vLONG, sizeof(LONG) ) );				// CoreTrait1-3
+
+	CQueryData query_data;
+	query_data.SetReturnData( &dwUserIdx, sizeof(int) );
+	query_data.SetData(
+		dwThreadID,
+		_RESULT_CHECK,
+		DBAGENT_INDIVIDUALITY_DATA_GET,
+		_SELECTEX1DB,
+		queryId,
+		v_FT,
+		v_VT );
+
+	SP2Packet kPacket(DTPK_QUERY);
+	PACKET_GUARD_VOID_WRITE(kPacket, query_data);
+	if( !SendMessage( dwAgentID, kPacket ) )
+	{
+		LOG.PrintTimeAndLog( LOG_DEBUG_LEVEL,"DB OnLoginSelectAllIndividuality Send Fail! :%d - %d", GetLastError(), queryId );
+		return;
+	}
+}
+
+void DBClient::OnInsertIndividuality( const DWORD dwAgentID, const DWORD dwThreadID, const ioHashString &szUserGUID, const ioHashString &szID, DWORD dwUserIdx, cSerialize& v_FT )
+{
+	if( szID.IsEmpty() ) return;
+
+	const int queryId = 2211;
+
+	vVALUETYPE v_VT;
+
+	CQueryData query_data;
+	query_data.SetData(
+		dwThreadID,
+		_RESULT_CHECK,
+		DBAGENT_INDIVIDUALITY_DATA_SET,
+		_INSERTDB,
+		queryId,
+		v_FT,
+		v_VT );
+
+	SP2Packet kPacket( DTPK_QUERY );
+	kPacket << query_data;
+	if( !SendMessage( dwAgentID, kPacket ) )
+	{
+		LOG.PrintTimeAndLog( LOG_DEBUG_LEVEL, "DB OnInsertIndividuality Send Fail! :%d - %d", GetLastError(), queryId );
+		return;
+	}
+	OnSelectIndividualityIndex( dwAgentID, dwThreadID, szUserGUID, szID, dwUserIdx );
+}
+
+void DBClient::OnSelectIndividualityIndex( const DWORD dwAgentID, const DWORD dwThreadID, const ioHashString &szUserGUID, const ioHashString &szID, DWORD dwUserIdx )
+{
+	const int queryId = 2212;
+
+	cSerialize v_FT;
+	vVALUETYPE v_VT;
+
+	v_FT.Write( dwUserIdx );
+	v_VT.push_back( GetValueType( vLONG, sizeof(LONG) ) );		// Individuality INDEX
+
+	CQueryData query_data;
+	query_data.SetReturnData( &dwUserIdx, sizeof(int) );
+	query_data.SetData(
+		dwThreadID,
+		_RESULT_CHECK,
+		DBAGENT_INDIVIDUALITY_DATA_NEW_INDEX,
+		_SELECTDB,
+		queryId,
+		v_FT,
+		v_VT );
+
+	SP2Packet kPacket( DTPK_QUERY );
+	kPacket << query_data;
+	if( !SendMessage( dwAgentID, kPacket ) )
+	{
+		LOG.PrintTimeAndLog( LOG_DEBUG_LEVEL, "DB OnSelectIndividualityIndex Send Fail! :%d - %d", GetLastError(), queryId );
+		return;
+	}
+}
+
+void DBClient::OnUpdateIndividuality( const DWORD dwAgentID, const DWORD dwThreadID, int user_index, DWORD dwIdx, cSerialize& v_FT )
+{
+	const int queryId = 2213;
+
+	vVALUETYPE v_VT;
+
+	CQueryData query_data;
+	query_data.SetData(
+		dwThreadID,
+		_RESULT_CHECK,
+		DBAGENT_INDIVIDUALITY_DATA_UPD,
+		_UPDATEDB,
+		queryId,
+		v_FT,
+		v_VT );
+
+	SP2Packet kPacket(DTPK_QUERY);
+	PACKET_GUARD_VOID_WRITE(kPacket, query_data);
+	if( !SendMessage( dwAgentID, kPacket ) )
+	{
+		LOG.PrintTimeAndLog( LOG_DEBUG_LEVEL,"DB OnUpdateIndividuality Send Fail! :%d - %d", GetLastError(), queryId );
+		return;
+	}
+}
+
 
 void DBClient::OnInsertFishData( const DWORD dwAgentID, const DWORD dwThreadID, const ioHashString &szUserGUID, const ioHashString &szID, DWORD dwUserIdx, cSerialize& v_FT )
 {
